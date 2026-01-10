@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Index – Dominican Republic Business Directory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The national yellow pages. Find businesses in Dominican Republic with mathematical precision.">
+  
+  <!-- Swiss Typography: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Swiss Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    /* ---------- SWISS DESIGN TOKENS ---------- */
+    :root {
+      /* Swiss Color System */
+      --swiss-bg: #FFFFFF;
+      --swiss-fg: #000000;
+      --swiss-muted: #F2F2F2;
+      --swiss-accent: #FF3000;
+      --swiss-border: #000000;
+      
+      /* Swiss Typography */
+      --swiss-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --swiss-line-height: 1.2;
+      
+      /* Swiss Grid */
+      --swiss-grid-size: 24px;
+      --swiss-max-width: 1200px;
+      --swiss-gap: 24px;
+      
+      /* Swiss Animation */
+      --swiss-transition: all 0.15s ease-out;
+    }
+
+    /* ---------- SWISS PATTERNS (CRITICAL) ---------- */
+    /* Grid Pattern - Visible structure */
+    .swiss-grid-pattern {
+      background-image: 
+        linear-gradient(var(--swiss-fg) 1px, transparent 1px),
+        linear-gradient(90deg, var(--swiss-fg) 1px, transparent 1px);
+      background-size: var(--swiss-grid-size) var(--swiss-grid-size);
+      background-position: -1px -1px;
+      opacity: 0.03;
+    }
+
+    /* Dot Matrix - Print texture */
+    .swiss-dots {
+      background-image: radial-gradient(var(--swiss-fg) 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity: 0.04;
+    }
+
+    /* Diagonal Lines - Directional energy */
+    .swiss-diagonal {
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        var(--swiss-fg) 5px,
+        var(--swiss-fg) 10px
+      );
+      background-size: 28px 28px;
+      opacity: 0.02;
+    }
+
+    /* Noise Texture - Paper grain */
+    .swiss-noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+    }
+
+    /* ---------- SWISS RESET ---------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--swiss-font);
+      color: var(--swiss-fg);
+      background: var(--swiss-bg);
+      line-height: var(--swiss-line-height);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Apply noise texture to entire page */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+    }
+
+    /* Remove all rounded corners */
+    * {
+      border-radius: 0 !important;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border: 2px solid var(--swiss-border);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--swiss-transition);
+    }
+
+    button, input, textarea {
+      font: inherit;
+      color: inherit;
+      border: 2px solid var(--swiss-border);
+      background: var(--swiss-bg);
+      transition: var(--swiss-transition);
+    }
+
+    /* ---------- SWISS TYPOGRAPHY HIERARCHY ---------- */
+    h1 {
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+    }
+
+    h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 65ch;
+    }
+
+    .swiss-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--swiss-accent);
+    }
+
+    .swiss-number {
+      font-size: 0.875rem;
+      font-weight: 900;
+      color: var(--swiss-accent);
+    }
+
+    /* ---------- SWISS HEADER ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--swiss-bg);
+      border-bottom: 4px solid var(--swiss-border);
+    }
+
+    .header-inner {
+      max-width: var(--swiss-max-width);
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--swiss-gap);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--swiss-border);
+      background: var(--swiss-fg);
+      color: var(--swiss-bg);
+    }
+
+    .logo .material-icons {
+      font-size: 24px;
+    }
+
+    /* Swiss Search Bar */
+    .search-bar {
+      display: flex;
+      position: relative;
+      max-width: 600px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--swiss-border);
+      font-size: 1rem;
+      font-weight: 500;
+      background: var(--swiss-bg);
+      transition: var(--swiss-transition);
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--swiss-accent);
+      background: var(--swiss-muted);
+    }
+
+    .search-bar button {
+      padding: 1rem 2rem;
+      background: var(--swiss-fg);
+      color: var(--swiss-bg);
+      border: 2px solid var(--swiss-border);
+      border-left: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: var(--swiss-transition);
+    }
+
+    .search-bar button:hover {
+      background: var(--swiss-accent);
+      color: var(--swiss-bg);
+    }
+
+    /* Swiss Navigation */
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.75rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--swiss-accent);
+      transform: translateY(100%);
+      transition: transform 0.2s ease-out;
+    }
+
+    nav a:hover::after {
+      transform: translateY(0);
+    }
+
+    /* ---------- SWISS HERO ---------- */
+    .hero {
+      padding: 6rem 1.5rem;
+      text-align: center;
+      border-bottom: 4px solid var(--swiss-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(var(--swiss-fg) 1px, transparent 1px),
+        linear-gradient(90deg, var(--swiss-fg) 1px, transparent 1px);
+      background-size: 48px 48px;
+      background-position: -1px -1px;
+      opacity: 0.02;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .hero h1::after {
+      content: '01';
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--swiss-accent);
+      letter-spacing: 0.2em;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin: 0 auto 3rem;
+      max-width: 45ch;
+      font-weight: 500;
+    }
+
+    /* Swiss Geometric Composition */
+    .hero-composition {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-composition div {
+      position: absolute;
+      border: 2px solid var(--swiss-border);
+    }
+
+    .comp-1 {
+      width: 120px;
+      height: 120px;
+      top: 10%;
+      left: 10%;
+      background: var(--swiss-accent);
+      opacity: 0.1;
+    }
+
+    .comp-2 {
+      width: 80px;
+      height: 80px;
+      bottom: 20%;
+      right: 15%;
+      background: var(--swiss-fg);
+      opacity: 0.05;
+    }
+
+    .comp-3 {
+      width: 200px;
+      height: 4px;
+      top: 50%;
+      left: 5%;
+      background: var(--swiss-fg);
+      opacity: 0.1;
+    }
+
+    /* ---------- SWISS CATEGORIES ---------- */
+    .categories-section {
+      max-width: var(--swiss-max-width);
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      border-bottom: 4px solid var(--swiss-border);
+      position: relative;
+    }
+
+    .categories-section h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .categories-section h2::before {
+      content: '02';
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--swiss-accent);
+      letter-spacing: 0.2em;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .cat-card {
+      border: 2px solid var(--swiss-border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: var(--swiss-bg);
+      transition: var(--swiss-transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--swiss-fg);
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .cat-card:hover::before {
+      opacity: 1;
+    }
+
+    .cat-card:hover {
+      color: var(--swiss-bg);
+      border-color: var(--swiss-fg);
+    }
+
+    .cat-card:hover .material-icons {
+      color: var(--swiss-bg);
+    }
+
+    .cat-card .material-icons {
+      font-size: 48px;
+      color: var(--swiss-fg);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      transition: var(--swiss-transition);
+    }
+
+    .cat-card h3 {
+      position: relative;
+      z-index: 1;
+      font-size: 0.875rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* Swiss View All */
+    .view-all {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .swiss-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--swiss-bg);
+      color: var(--swiss-fg);
+      border: 2px solid var(--swiss-border);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: var(--swiss-transition);
+    }
+
+    .swiss-button:hover {
+      background: var(--swiss-fg);
+      color: var(--swiss-bg);
+    }
+
+    .swiss-button:hover .material-icons {
+      transform: rotate(90deg);
+    }
+
+    .swiss-button .material-icons {
+      transition: transform 0.2s ease-out;
+    }
+
+    /* ---------- SWISS LISTINGS ---------- */
+    .listing-section {
+      max-width: var(--swiss-max-width);
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      border-bottom: 4px solid var(--swiss-border);
+    }
+
+    .listing-section h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .listing-section h2::before {
+      content: '03';
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--swiss-accent);
+      letter-spacing: 0.2em;
+    }
+
+    .listing-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      border: 2px solid var(--swiss-border);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      background: var(--swiss-bg);
+      transition: var(--swiss-transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .listing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: radial-gradient(var(--swiss-fg) 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    .listing-card:hover {
+      border-color: var(--swiss-accent);
+      transform: translateY(-2px);
+    }
+
+    .listing-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border: 2px solid var(--swiss-border);
+    }
+
+    .listing-details h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .listing-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .meta-item .material-icons {
+      font-size: 16px;
+      color: var(--swiss-accent);
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--swiss-border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--swiss-bg);
+      transition: var(--swiss-transition);
+    }
+
+    .tag:hover {
+      background: var(--swiss-fg);
+      color: var(--swiss-bg);
+    }
+
+    /* ---------- SWISS FOOTER ---------- */
+    footer {
+      background: var(--swiss-fg);
+      color: var(--swiss-bg);
+      padding: 4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '04';
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--swiss-accent);
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+    }
+
+    .footer-inner {
+      max-width: var(--swiss-max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .footer-inner h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      color: var(--swiss-bg);
+    }
+
+    .footer-inner p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-inner ul {
+      list-style: none;
+    }
+
+    .footer-inner li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-inner a {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      transition: var(--swiss-transition);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .footer-inner a:hover {
+      color: var(--swiss-accent);
+    }
+
+    .footer-bottom {
+      max-width: var(--swiss-max-width);
+      margin: 4rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ---------- SWISS ACCESSIBILITY ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--swiss-accent);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--swiss-fg);
+      color: var(--swiss-bg);
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--swiss-border);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--swiss-accent);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ---------- SWISS RESPONSIVE ---------- */
+    @media (max-width: 1024px) {
+      .header-inner {
+        grid-template-columns: auto 1fr;
+      }
+      
+      nav {
+        grid-column: 1 / -1;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+      
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+      
+      .footer-inner > div:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+      }
+      
+      h2 {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+      }
+      
+      .categories {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+      
+      .listing-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .listing-card img {
+        width: 100%;
+        height: 200px;
+      }
+      
+      .meta-item {
+        font-size: 0.75rem;
+      }
+      
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .logo {
+        justify-content: center;
+      }
+      
+      nav {
+        grid-column: auto;
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      
+      .categories {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .hero {
+        padding: 4rem 1rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ========== SWISS HEADER ========== -->
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="/" aria-label="Index – Dominican Republic Business Directory">
+        <span class="material-icons" aria-hidden="true">grid_on</span>
+        Index
+      </a>
+
+      <form class="search-bar" action="#" method="get" role="search">
+        <label for="q" class="visually-hidden">Search businesses</label>
+        <input type="text" id="q" name="q" placeholder="BUSINESS, SERVICE, KEYWORD" required>
+        <button type="submit" aria-label="Search">
+          <span class="material-icons" aria-hidden="true">search</span> SEARCH
+        </button>
+      </form>
+
+      <nav aria-label="Primary">
+        <a href="#categories">CATEGORIES</a>
+        <a href="#listings">LISTINGS</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== SWISS HERO ========== -->
+  <section class="hero">
+    <div class="hero-composition">
+      <div class="comp-1"></div>
+      <div class="comp-2"></div>
+      <div class="comp-3"></div>
+    </div>
+    
+    <h1>DOMINICAN REPUBLIC BUSINESS DIRECTORY</h1>
+    <p>Mathematical precision in business discovery. From Santo Domingo to Punta Cana—structured information, no noise.</p>
+    
+    <div class="view-all">
+      <a href="#categories" class="swiss-button">
+        BROWSE CATEGORIES
+        <span class="material-icons">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== SWISS CATEGORIES ========== -->
+  <section id="categories" class="categories-section" aria-labelledby="cat-title">
+    <h2 id="cat-title">POPULAR CATEGORIES</h2>
+
+    <div class="categories">
+      <a class="cat-card" href="?c=restaurants">
+        <span class="material-icons" aria-hidden="true">restaurant</span>
+        <h3>Restaurants</h3>
+      </a>
+
+      <a class="cat-card" href="?c=hotels">
+        <span class="material-icons" aria-hidden="true">hotel</span>
+        <h3>Hotels</h3>
+      </a>
+
+      <a class="cat-card" href="?c=doctors">
+        <span class="material-icons" aria-hidden="true">medical_services</span>
+        <h3>Doctors</h3>
+      </a>
+
+      <a class="cat-card" href="?c=auto">
+        <span class="material-icons" aria-hidden="true">directions_car</span>
+        <h3>Auto Services</h3>
+      </a>
+
+      <a class="cat-card" href="?c=education">
+        <span class="material-icons" aria-hidden="true">school</span>
+        <h3>Schools</h3>
+      </a>
+
+      <a class="cat-card" href="?c=shopping">
+        <span class="material-icons" aria-hidden="true">shopping_bag</span>
+        <h3>Shopping</h3>
+      </a>
+
+      <a class="cat-card" href="?c=home">
+        <span class="material-icons" aria-hidden="true">plumbing</span>
+        <h3>Home Repairs</h3>
+      </a>
+
+      <a class="cat-card" href="?c=legal">
+        <span class="material-icons" aria-hidden="true">gavel</span>
+        <h3>Legal</h3>
+      </a>
+    </div>
+
+    <div class="view-all">
+      <a href="#categories" class="swiss-button">
+        VIEW ALL CATEGORIES
+        <span class="material-icons">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== SWISS LISTINGS ========== -->
+  <main id="main" class="listing-section" aria-labelledby="list-title">
+    <h2 id="list-title">FEATURED BUSINESSES</h2>
+
+    <article class="listing-card">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80" alt="Exterior of Jalao Restaurant">
+      <div class="listing-details">
+        <h3>JALAO RESTAURANT</h3>
+        <div class="listing-meta">
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">location_on</span>
+            ZONA COLONIAL, SANTO DOMINGO
+          </span>
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">phone</span>
+            +1 809-686-5200
+          </span>
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">schedule</span>
+            OPEN UNTIL 23:00
+          </span>
+        </div>
+        <p>Authentic Dominican flavours in the heart of the Colonial Zone. Live music nightly.</p>
+        <div class="tags">
+          <span class="tag">RESTAURANT</span>
+          <span class="tag">LIVE MUSIC</span>
+          <span class="tag">VEGETARIAN</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="listing-card">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80" alt="Infinity pool at Hotel Casa del Mar">
+      <div class="listing-details">
+        <h3>HOTEL CASA DEL MAR</h3>
+        <div class="listing-meta">
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">location_on</span>
+            LAS TERRENAS, SAMANÁ
+          </span>
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">phone</span>
+            +1 809-123-4567
+          </span>
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">star</span>
+            4.8 ★ (312 REVIEWS)
+          </span>
+        </div>
+        <p>Ocean-front boutique hotel with 12 suites, rooftop spa and complimentary breakfast.</p>
+        <div class="tags">
+          <span class="tag">HOTEL</span>
+          <span class="tag">SPA</span>
+          <span class="tag">BEACHFRONT</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="listing-card">
+      <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267e0?auto=format&fit=crop&w=400&q=80" alt="Auto repair mechanic">
+      <div class="listing-details">
+        <h3>TALLER HERRERA</h3>
+        <div class="listing-meta">
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">location_on</span>
+            AVENIDA LOPE DE VEGA
+          </span>
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">phone</span>
+            +1 809-555-3388
+          </span>
+          <span class="meta-item">
+            <span class="material-icons" aria-hidden="true">schedule</span>
+            MON–SAT 08:00–18:00
+          </span>
+        </div>
+        <p>Certified mechanics, computerized diagnostics, genuine parts, 12-month warranty.</p>
+        <div class="tags">
+          <span class="tag">AUTO REPAIR</span>
+          <span class="tag">DIAGNOSTICS</span>
+          <span class="tag">WARRANTY</span>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- ========== SWISS FOOTER ========== -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div>
+        <h4>INDEX</h4>
+        <p>The national yellow pages of Dominican Republic. Structured information, no noise. Mathematical precision in business discovery.</p>
+      </div>
+      <div>
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="?add=1">ADD YOUR BUSINESS</a></li>
+          <li><a href="?about">ABOUT US</a></li>
+          <li><a href="?faq">FAQ</a></li>
+          <li><a href="?privacy">PRIVACY POLICY</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="mailto:hola@index.do">HOLA@INDEX.DO</a></li>
+          <li><a href="tel:+18091234567">+1 809-123-4567</a></li>
+          <li><a href="https://maps.google.com">AV. CHURCHILL, TORRE ACRÓPOLIS</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 INDEX DOMINICAN REPUBLIC. ALL RIGHTS RESERVED.
+    </div>
+  </footer>
+</body>
+</html>

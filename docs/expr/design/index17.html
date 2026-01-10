@@ -1,0 +1,936 @@
+<!doctype html>
+<!--
+  Local Finder — Playful Geometric Redesign
+  Transformed to match the "Playful Geometric" design system
+  Fully static, no JavaScript required
+  WCAG 2.2 AA compliant
+-->
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Index — Dominican Republic Business Directory</title>
+  <meta name="description" content="Dominican Republic's national yellow pages — clean, accessible, and beautifully designed." />
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* === Design Tokens === */
+    :root {
+      /* Colors - Playful Geometric Palette */
+      --background: #FFFDF5;    /* Warm Cream */
+      --foreground: #1E293B;    /* Slate 800 */
+      --muted: #F1F5F9;        /* Slate 100 */
+      --muted-foreground: #64748B; /* Slate 500 */
+      --accent: #8B5CF6;       /* Vivid Violet */
+      --accent-foreground: #FFFFFF;
+      --secondary: #F472B6;    /* Hot Pink */
+      --tertiary: #FBBF24;     /* Amber/Yellow */
+      --quaternary: #34D399;   /* Emerald/Mint */
+      --border: #E2E8F0;       /* Slate 200 */
+      --input: #FFFFFF;
+      --card: #FFFFFF;
+      --ring: #8B5CF6;
+      
+      /* Radius */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-hard: 4px 4px 0px 0px var(--foreground);
+      --shadow-hard-hover: 6px 6px 0px 0px var(--foreground);
+      --shadow-hard-active: 2px 2px 0px 0px var(--foreground);
+      --shadow-soft: 8px 8px 0px var(--border);
+      --shadow-pink: 8px 8px 0px var(--secondary);
+      
+      /* Typography */
+      --font-heading: 'Outfit', system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      
+      /* Spacing */
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      
+      /* Container */
+      --max-width: 1200px;
+      
+      /* Transitions */
+      --transition-bounce: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    /* === Reset & Base Styles === */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: var(--spacing-lg);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Geometric Background Elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: var(--tertiary);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: -1;
+    }
+    
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -150px;
+      left: -150px;
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      border-radius: 50%;
+      opacity: 0.05;
+      z-index: -1;
+    }
+    
+    /* === Typography === */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+    
+    h2 {
+      font-size: 2rem;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+    }
+    
+    p {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .lead {
+      font-size: 1.25rem;
+      color: var(--muted-foreground);
+    }
+    
+    /* === Layout === */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    /* Header & Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-lg) 0;
+      margin-bottom: var(--spacing-2xl);
+      position: relative;
+    }
+    
+    .branding {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-bounce);
+    }
+    
+    .branding:hover {
+      transform: translateY(-2px);
+    }
+    
+    .logo {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      border-radius: var(--radius-md);
+      border: 2px solid var(--foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--accent-foreground);
+      box-shadow: var(--shadow-hard);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.1) 50%);
+    }
+    
+    .tagline {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-top: var(--spacing-xs);
+    }
+    
+    /* === Buttons === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      padding: 12px 24px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 2px solid var(--foreground);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition-bounce);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-foreground);
+      box-shadow: var(--shadow-hard);
+    }
+    
+    .btn-primary:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-hard-hover);
+    }
+    
+    .btn-primary:active {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-hard-active);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--foreground);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--tertiary);
+    }
+    
+    /* === Search Area === */
+    .search-section {
+      margin-bottom: var(--spacing-2xl);
+      position: relative;
+    }
+    
+    .search-section::before {
+      content: '✦';
+      position: absolute;
+      top: -20px;
+      right: 20px;
+      font-size: 2rem;
+      color: var(--quaternary);
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .search-bar {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-bounce);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .search-bar:focus-within {
+      border-color: var(--accent);
+      box-shadow: 4px 4px 0px 0px var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .search-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary), var(--tertiary));
+    }
+    
+    .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .search-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      padding: var(--spacing-sm);
+      outline: none;
+    }
+    
+    .search-input::placeholder {
+      color: var(--muted-foreground);
+    }
+    
+    /* === Categories Grid === */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+    
+    .category-card {
+      background: var(--card);
+      border: 2px solid var(--foreground);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-bounce);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .category-card:nth-child(3n+1) {
+      box-shadow: var(--shadow-pink);
+    }
+    
+    .category-card:nth-child(3n+2) {
+      box-shadow: 8px 8px 0px var(--quaternary);
+    }
+    
+    .category-card:nth-child(3n+3) {
+      box-shadow: 8px 8px 0px var(--tertiary);
+    }
+    
+    .category-card:hover {
+      transform: rotate(-1deg) scale(1.02);
+    }
+    
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-md);
+      border: 2px solid var(--foreground);
+      color: var(--accent-foreground);
+      font-weight: bold;
+    }
+    
+    .category-count {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--muted);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      margin-top: var(--spacing-sm);
+    }
+    
+    /* === Business Listings === */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: var(--spacing-2xl) 0 var(--spacing-lg);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 2px dashed var(--border);
+    }
+    
+    .results-count {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+    
+    .business-card {
+      background: var(--card);
+      border: 2px solid var(--foreground);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      transition: var(--transition-bounce);
+      position: relative;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .business-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 12px 12px 0px var(--border);
+    }
+    
+    .business-card.featured {
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-pink);
+    }
+    
+    .business-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .business-avatar {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent), var(--quaternary));
+      border-radius: var(--radius-md);
+      border: 2px solid var(--foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--accent-foreground);
+      flex-shrink: 0;
+    }
+    
+    .business-info h3 {
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .business-category {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--muted);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+    
+    .business-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+      flex-wrap: wrap;
+    }
+    
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--tertiary);
+      font-weight: 500;
+    }
+    
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      background: var(--quaternary);
+      color: var(--foreground);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .business-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-lg);
+    }
+    
+    /* === Business Profile === */
+    .business-profile {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 2px solid var(--foreground);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-2xl);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .profile-header {
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+      position: relative;
+    }
+    
+    .profile-header::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      border-radius: var(--radius-full);
+    }
+    
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      border-radius: var(--radius-lg);
+      border: 3px solid var(--foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--spacing-lg);
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-foreground);
+      box-shadow: var(--shadow-hard);
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+    
+    .contact-item {
+      background: var(--muted);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      text-align: center;
+      transition: var(--transition-bounce);
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-4px);
+    }
+    
+    /* === Footer === */
+    footer {
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-2xl);
+      border-top: 2px dashed var(--border);
+      text-align: center;
+      color: var(--muted-foreground);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .footer-section h4 {
+      color: var(--foreground);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .copyright {
+      font-size: 0.875rem;
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+    
+    /* === Accessibility === */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    
+    .skip-link:focus {
+      left: var(--spacing-md);
+      top: var(--spacing-md);
+      width: auto;
+      height: auto;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--accent);
+      color: var(--accent-foreground);
+      border-radius: var(--radius-sm);
+      z-index: 9999;
+      text-decoration: none;
+    }
+    
+    :focus {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+    }
+    
+    /* === Responsive Design === */
+    @media (max-width: 768px) {
+      body {
+        padding: var(--spacing-md);
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+      }
+      
+      .business-grid,
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .results-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+      }
+      
+      .business-actions {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+    
+    /* === Reduced Motion === */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      .business-card:hover,
+      .category-card:hover,
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip to main content for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="index.html" class="branding">
+        <div class="logo">IN</div>
+        <div>
+          <h1>Index</h1>
+          <span class="tagline">Dominican Republic's National Business Directory</span>
+        </div>
+      </a>
+      
+      <nav>
+        <a href="#categories" class="btn btn-secondary">Browse Categories</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Hero Search Section -->
+      <section class="search-section" aria-label="Search businesses">
+        <div class="search-bar">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input 
+              type="search" 
+              class="search-input" 
+              placeholder="Search for businesses, services, or locations (e.g., 'Dentist in Santo Domingo')"
+              aria-label="Search businesses"
+            />
+            <button class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories Grid -->
+      <section id="categories" aria-label="Browse by category">
+        <h2>Popular Categories</h2>
+        <div class="categories-grid">
+          <a href="category.html?cat=restaurants" class="category-card">
+            <div class="category-icon">🍴</div>
+            <h3>Restaurants</h3>
+            <p>Discover local eateries and dining experiences</p>
+            <span class="category-count">1,245 listings</span>
+          </a>
+          
+          <a href="category.html?cat=healthcare" class="category-card">
+            <div class="category-icon">🏥</div>
+            <h3>Healthcare</h3>
+            <p>Doctors, clinics, and medical services</p>
+            <span class="category-count">892 listings</span>
+          </a>
+          
+          <a href="category.html?cat=automotive" class="category-card">
+            <div class="category-icon">🚗</div>
+            <h3>Automotive</h3>
+            <p>Repair shops, car dealers, and services</p>
+            <span class="category-count">567 listings</span>
+          </a>
+          
+          <a href="category.html?cat=legal" class="category-card">
+            <div class="category-icon">⚖️</div>
+            <h3>Legal Services</h3>
+            <p>Lawyers, notaries, and legal consultants</p>
+            <span class="category-count">321 listings</span>
+          </a>
+          
+          <a href="category.html?cat=retail" class="category-card">
+            <div class="category-icon">🛍️</div>
+            <h3>Retail</h3>
+            <p>Shops, stores, and local businesses</p>
+            <span class="category-count">1,890 listings</span>
+          </a>
+          
+          <a href="category.html?cat=construction" class="category-card">
+            <div class="category-icon">🏗️</div>
+            <h3>Construction</h3>
+            <p>Contractors, materials, and services</p>
+            <span class="category-count">743 listings</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Featured Businesses -->
+      <section aria-label="Featured businesses">
+        <div class="results-header">
+          <h2>Featured Businesses</h2>
+          <div class="results-count">Showing 6 verified businesses</div>
+        </div>
+        
+        <div class="business-grid">
+          <!-- Business 1 -->
+          <article class="business-card featured">
+            <div class="business-header">
+              <div class="business-avatar">CD</div>
+              <div class="business-info">
+                <h3>Clínica Vida Dental</h3>
+                <span class="business-category">Healthcare</span>
+              </div>
+            </div>
+            <p>Professional dental care with modern equipment and friendly staff in Santo Domingo.</p>
+            <div class="business-meta">
+              <div class="rating">★★★★★ 4.8</div>
+              <div class="verified-badge">✓ Verified</div>
+            </div>
+            <div class="business-actions">
+              <a href="business.html?id=1" class="btn btn-primary">View Details</a>
+              <a href="tel:+18095551234" class="btn btn-secondary">Call Now</a>
+            </div>
+          </article>
+          
+          <!-- Business 2 -->
+          <article class="business-card">
+            <div class="business-header">
+              <div class="business-avatar">CC</div>
+              <div class="business-info">
+                <h3>Cafe Central</h3>
+                <span class="business-category">Cafe</span>
+              </div>
+            </div>
+            <p>Cozy cafe serving the best Dominican coffee and pastries in the city center.</p>
+            <div class="business-meta">
+              <div class="rating">★★★★☆ 4.3</div>
+              <span>Open until 10 PM</span>
+            </div>
+            <div class="business-actions">
+              <a href="business.html?id=2" class="btn btn-primary">View Details</a>
+              <a href="tel:+18095551235" class="btn btn-secondary">Call Now</a>
+            </div>
+          </article>
+          
+          <!-- Business 3 -->
+          <article class="business-card">
+            <div class="business-header">
+              <div class="business-avatar">TA</div>
+              <div class="business-info">
+                <h3>Taller AutoPro</h3>
+                <span class="business-category">Automotive</span>
+              </div>
+            </div>
+            <p>Reliable car repair and maintenance services with certified mechanics.</p>
+            <div class="business-meta">
+              <div class="rating">★★★★★ 4.6</div>
+              <div class="verified-badge">✓ Verified</div>
+            </div>
+            <div class="business-actions">
+              <a href="business.html?id=3" class="btn btn-primary">View Details</a>
+              <a href="tel:+18095551236" class="btn btn-secondary">Call Now</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Business Profile Example (hidden by default, shown when viewing single business) -->
+      <template id="business-profile-template">
+        <div class="business-profile">
+          <div class="profile-header">
+            <div class="profile-avatar">CD</div>
+            <h1>Clínica Vida Dental</h1>
+            <p class="lead">Professional dental care with modern equipment</p>
+          </div>
+          
+          <div class="contact-info">
+            <div class="contact-item">
+              <h4>📍 Location</h4>
+              <p>Av. 27 de Febrero #123<br>Santo Domingo, DN</p>
+            </div>
+            <div class="contact-item">
+              <h4>📞 Contact</h4>
+              <p><strong>Phone:</strong> (809) 555-1234<br>
+              <strong>Email:</strong> info@clinicavidadental.do</p>
+            </div>
+            <div class="contact-item">
+              <h4>🕐 Hours</h4>
+              <p><strong>Mon-Fri:</strong> 8:00 AM - 6:00 PM<br>
+              <strong>Sat:</strong> 9:00 AM - 1:00 PM</p>
+            </div>
+          </div>
+          
+          <div class="business-actions" style="justify-content: center;">
+            <a href="tel:+18095551234" class="btn btn-primary">Call Now</a>
+            <a href="directions.html" class="btn btn-secondary">Get Directions</a>
+          </div>
+        </div>
+      </template>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Index Directory</h4>
+          <p>The Dominican Republic's trusted business directory since 2024.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#categories">Browse Categories</a></li>
+            <li><a href="#featured">Featured Businesses</a></li>
+            <li><a href="add-business.html">Add Your Business</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:info@index.do">info@index.do</a></li>
+            <li><a href="tel:+18095550000">(809) 555-0000</a></li>
+            <li>Santo Domingo, DN</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>© 2024 Index — Dominican Republic Business Directory. All rights reserved.</p>
+        <p>Accessibility compliant with WCAG 2.2 AA standards.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

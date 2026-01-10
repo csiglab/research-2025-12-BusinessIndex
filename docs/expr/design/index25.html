@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice - Dominican Republic Business Directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* ===== CSS RESET & BASE STYLES - Optimized for Compactness and Readability ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Design Tokens - Botanical Organic, high contrast */
+            --color-background: #F9F8F4;
+            --color-foreground: #2D3A31;
+            --color-primary: #8C9A84;
+            --color-secondary: #DCCFC2;
+            --color-border: #E6E2DA;
+            --color-interactive: #C27B66; /* Terracotta/Reddish Brown */
+            --color-white: #FFFFFF;
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Source Sans 3', sans-serif;
+
+            /* Spacing - Tighter for efficiency */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 3rem;
+            --space-xl: 5rem;
+            
+            /* Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px -1px rgba(45, 58, 49, 0.05);
+            --shadow-md: 0 5px 10px -3px rgba(45, 58, 49, 0.05);
+            
+            /* Transitions */
+            --transition-fast: 200ms ease-out;
+        }
+
+        /* WCAG 2.2 AA Focus State */
+        :focus {
+            outline: 3px solid var(--color-interactive);
+            outline-offset: 3px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 1rem; 
+            line-height: 1.6;
+            color: var(--color-foreground);
+            background-color: var(--color-background);
+            overflow-x: hidden;
+        }
+
+        /* Paper Grain Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.015;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: var(--space-xs);
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 6vw, 3.5rem); /* Minimal H1 for a compact hero */
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+        }
+
+        .italic {
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .text-lead {
+            font-size: 1.125rem;
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* ===== LAYOUT UTILITIES ===== */
+        .container {
+            width: 100%;
+            max-width: 75rem;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .section {
+            padding: var(--space-lg) 0;
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .grid-cols-2,
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            .section {
+                padding: var(--space-md) 0;
+            }
+        }
+
+        /* ===== NAVIGATION (STATIC/NO-JS COMPLIANCE) ===== */
+        .header {
+            position: sticky; 
+            top: 0;
+            width: 100%;
+            background-color: rgba(249, 248, 244, 0.98); 
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-foreground);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .logo span {
+            color: var(--color-interactive);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .nav-link {
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--color-foreground);
+            padding: var(--space-xs) 0;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--color-interactive);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-interactive);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                position: static; 
+                padding: var(--space-sm) 0;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-menu {
+                /* On mobile, navigation links are simplified and stacked below the logo */
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: var(--space-sm);
+                margin-top: var(--space-sm);
+                padding-top: var(--space-sm);
+                border-top: 1px solid var(--color-border);
+            }
+            
+            .nav-link {
+                width: 100%;
+            }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-radius: var(--radius-md);
+            min-height: 2.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-foreground);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-interactive);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            transform: translateY(-1px);
+        }
+
+        .btn-search {
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem;
+            border-radius: var(--radius-full);
+            min-height: 3rem;
+        }
+        
+        /* Highlight the Primary CTA for adding a business */
+        .nav-menu .btn-primary {
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+        }
+
+
+        /* ===== SEARCH COMPONENT - The Core Action (Smaller Hero) ===== */
+        .search-hero {
+            /* FIX: Reduced vertical padding for a smaller hero section */
+            padding: var(--space-md) 0; 
+            background: linear-gradient(to bottom, rgba(249, 248, 244, 0.8), var(--color-background));
+        }
+        
+        @media (min-width: 769px) {
+             .search-hero {
+                 /* FIX: Reduced top margin and padding for a tighter fit against the sticky nav */
+                 margin-top: 1.5rem; 
+                 padding: var(--space-md) 0 var(--space-sm) 0; 
+             }
+        }
+
+        .search-container {
+            max-width: 42rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+            background: var(--color-white);
+            padding: var(--space-xs);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            background: none;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--color-foreground);
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--color-primary);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .search-box {
+                flex-direction: column;
+                border-radius: var(--radius-md);
+                padding: var(--space-sm);
+                gap: var(--space-xs);
+            }
+            
+            .btn-search {
+                width: 100%;
+            }
+        }
+
+        /* DR Flag Colors for Title localization */
+        .dr-flag-colors {
+            position: relative;
+        }
+
+        .dr-flag-colors::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #002D62 33%, #FFFFFF 33%, #FFFFFF 66%, #CE1126 66%);
+            border-radius: var(--radius-full);
+            opacity: 0.7;
+        }
+
+        /* ===== CATEGORY CARDS - Immediately Following Search ===== */
+        .categories-section {
+            background-color: var(--color-secondary);
+            border-radius: var(--radius-lg);
+            margin: var(--space-lg) 0; 
+            padding: var(--space-lg) 0;
+        }
+        
+        .categories-section .container {
+            padding: var(--space-md);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .category-card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-decoration: none;
+            color: var(--color-foreground);
+            transition: all var(--transition-fast);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-interactive);
+        }
+
+        .category-icon {
+            font-size: 1.75rem;
+            color: var(--color-foreground);
+            margin-bottom: var(--space-xs);
+            background: var(--color-secondary);
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+        
+        .category-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+        
+        .category-card p {
+            font-size: 0.875rem;
+            margin: 0;
+            color: var(--color-primary);
+        }
+
+
+        /* ===== BUSINESS LISTINGS - Simpler & Tighter ===== */
+        .listing-card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+            transition: all var(--transition-fast);
+            border: 1px solid var(--color-border);
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            text-decoration: none;
+            color: var(--color-foreground);
+        }
+        
+        .listing-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--color-interactive);
+        }
+
+        .listing-image {
+            width: 4rem;
+            height: 4rem;
+            min-width: 4rem;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            background: var(--color-secondary);
+        }
+
+        .listing-info {
+            flex: 1;
+        }
+
+        .listing-name {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .listing-category {
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .listing-info p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .listing-rating {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            color: var(--color-interactive);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        /* FILTERS - Tighter and Purposeful */
+        .filter-section {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+            margin-bottom: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+        }
+
+        .filter-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-foreground);
+            text-transform: uppercase;
+        }
+
+        .filter-select {
+            padding: var(--space-xs);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            background: var(--color-background);
+        }
+        
+        /* ===== FOOTER - Essential and Compact ===== */
+        .footer {
+            background: var(--color-foreground);
+            color: var(--color-white);
+            padding: var(--space-lg) 0;
+            margin-top: var(--space-xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .footer-column h3 {
+            color: var(--color-secondary);
+            font-size: 1.125rem;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .footer-column p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a {
+            color: var(--color-white);
+            opacity: 0.7;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <i class="fas fa-map-pin" style="color: var(--color-interactive);"></i>
+                <span class="italic">Í</span>ndice
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#categories" class="nav-link">Categories</a>
+                <a href="#businesses" class="nav-link">Businesses</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#add-business" class="btn btn-primary">Add Business</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="search-hero">
+        <div class="container search-container">
+            <h1 class="dr-flag-colors" style="margin-bottom: var(--space-xs);">
+                Find <span class="italic">Trusted</span> Businesses<br>
+                in the <span class="italic">Dominican Republic</span>
+            </h1>
+            <p class="text-lead" style="margin-bottom: var(--space-md);">
+                The nation's simple, reliable directory. Start your search below.
+            </p>
+            
+            <div class="search-box" role="search">
+                <input 
+                    type="search" 
+                    class="search-input" 
+                    placeholder="Search by name, service, or location (e.g., 'plumber in Santiago')"
+                    aria-label="Search for businesses"
+                >
+                <button class="btn btn-primary btn-search" aria-label="Search">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+            
+            <div style="margin-top: var(--space-xs);">
+                <p style="font-size: 0.875rem; color: var(--color-primary); margin-bottom: 0;">
+                    Popular: 
+                    <a href="#restaurants" style="color: var(--color-interactive); font-weight: 500;">Restaurants</a> • 
+                    <a href="#hotels" style="color: var(--color-interactive); font-weight: 500;">Hotels</a> • 
+                    <a href="#doctors" style="color: var(--color-interactive); font-weight: 500;">Doctors</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <hr style="border: 0; height: 1px; background-color: var(--color-border); margin: 0 var(--space-md);">
+
+    <section id="categories" class="section categories-section">
+        <div class="container">
+            <h2 style="text-align: center;">Browse by <span class="italic">Category</span></h2>
+            <p class="text-lead" style="text-align: center; margin-bottom: var(--space-md);">Quick access to essential services and sectors.</p>
+            
+            <div class="category-grid">
+                <a href="#restaurants" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Restaurants</h3>
+                    <p>Fine Dining & Local</p>
+                </a>
+                
+                <a href="#healthcare" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Healthcare</h3>
+                    <p>Medical & Dental</p>
+                </a>
+                
+                <a href="#services" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Home Services</h3>
+                    <p>Plumbers, Electricians</p>
+                </a>
+                
+                <a href="#accommodation" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3>Hotels & Travel</h3>
+                    <p>Accommodation, Tours</p>
+                </a>
+                
+                <a href="#legal" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Legal Services</h3>
+                    <p>Lawyers, Notaries</p>
+                </a>
+                
+                <a href="#retail" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Retail & Shops</h3>
+                    <p>General Shopping</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="businesses" class="section">
+        <div class="container">
+            <h2 style="margin-bottom: var(--space-xs);">Top Rated <span class="italic">Businesses</span></h2>
+            <p class="text-lead">Highest rated and most trusted options across the country.</p>
+            
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label class="filter-label" for="location">Location</label>
+                        <select id="location" class="filter-select">
+                            <option value="">All Locations</option>
+                            <option value="santo-domingo">Santo Domingo</option>
+                            <option value="punta-cana">Punta Cana</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label" for="category">Category</label>
+                        <select id="category" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="restaurants">Restaurants</option>
+                            <option value="healthcare">Healthcare</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label" for="rating">Minimum Rating</label>
+                        <select id="rating" class="filter-select">
+                            <option value="">Any Rating</option>
+                            <option value="4.5">★★★★½ & up</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1" style="gap: var(--space-sm);">
+                <a href="#business-profile-link" class="listing-card">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" 
+                         alt="Restaurant El Mesón de la Cava interior" class="listing-image">
+                    <div class="listing-info">
+                        <h3 class="listing-name">El Mesón de la Cava</h3>
+                        <div class="listing-category">Fine Dining • Santo Domingo</div>
+                        <p>Unique cave-dining experience with exquisite Dominican cuisine.</p>
+                    </div>
+                    <div class="listing-rating">
+                        <i class="fas fa-star"></i>
+                        <span style="font-weight: 700;">4.8</span>
+                        <span>(247 reviews)</span>
+                    </div>
+                </a>
+                
+                <a href="#business-profile-link" class="listing-card">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" 
+                         alt="Clínica Abreu exterior" class="listing-image">
+                    <div class="listing-info">
+                        <h3 class="listing-name">Clínica Abreu</h3>
+                        <div class="listing-category">Healthcare • Santo Domingo</div>
+                        <p>A leading private hospital providing comprehensive medical services.</p>
+                    </div>
+                    <div class="listing-rating">
+                        <i class="fas fa-star"></i>
+                        <span style="font-weight: 700;">4.6</span>
+                        <span>(189 reviews)</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="section" style="text-align: center; background-color: var(--color-secondary); border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+        <div class="container" style="padding: var(--space-md) var(--space-sm);">
+            <h2>Ready to be <span class="italic">Found</span>?</h2>
+            <p class="text-lead" style="max-width: 600px; margin: 0 auto var(--space-md);">
+                List your business today and connect with thousands of customers across the DR.
+            </p>
+            <div style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap;">
+                <a href="#add-business" class="btn btn-primary btn-search">
+                    <i class="fas fa-plus-circle"></i> Add Your Business
+                </a>
+                 <a href="mailto:info@indice.do" class="btn btn-secondary btn-search">
+                    <i class="fas fa-envelope"></i> Contact Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3><span class="italic">Í</span>ndice</h3>
+                    <p>The Dominican Republic's trusted business directory. Connecting people with local businesses since 2024.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Browse Categories</a></li>
+                        <li><a href="#businesses">Top Businesses</a></li>
+                        <li><a href="#add-business">Add Your Business</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope" style="margin-right: var(--space-xs);"></i> info@indice.do</li>
+                        <li><i class="fas fa-phone" style="margin-right: var(--space-xs);"></i> (809) 555-INDICE</li>
+                        <li><i class="fas fa-balance-scale" style="margin-right: var(--space-xs);"></i> <a href="#privacy">Legal / Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Índice - Dominican Republic Business Directory. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Index - The Dominican Republic's leading business directory. Find companies, services, and professionals in Santo Domingo, Santiago, and beyond.">
+    <meta name="theme-color" content="#003366">
+    <title>Index | Dominican Republic Business Directory</title>
+    <style>
+        /* =========================================
+           1. DESIGN TOKENS & RESET
+           ========================================= */
+        :root {
+            /* Colors: Trustworthy Blue & Energetic Red */
+            --color-primary: #003366; /* Deep Ocean Blue */
+            --color-primary-light: #004d99;
+            --color-accent: #D32F2F;  /* Merengue Red */
+            --color-bg: #F8F9FA;
+            --color-surface: #FFFFFF;
+            --color-text-main: #1A1A1A;
+            --color-text-muted: #666666;
+            --color-border: #E0E0E0;
+            --color-success: #2E7D32;
+
+            /* Spacing & Layout */
+            --container-max: 1200px;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+            --space-xl: 4rem;
+            
+            /* Typography (System Stack for Speed) */
+            --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        ul { list-style: none; }
+
+        /* Accessibility: Focus Styles */
+        *:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .visually-hidden {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+        }
+
+        /* =========================================
+           2. LAYOUT UTILITIES
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--space-sm);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: white;
+        }
+        .btn-primary:hover { background-color: #B71C1C; }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+        .btn-outline:hover { background-color: rgba(0,51,102, 0.05); }
+
+        /* =========================================
+           3. HEADER & NAVIGATION (CSS-Only Mobile Menu)
+           ========================================= */
+        .site-header {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo svg { height: 24px; width: 24px; fill: currentColor; }
+
+        /* Desktop Nav */
+        .nav-links {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .nav-item {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--color-text-main);
+        }
+        .nav-item:hover { color: var(--color-primary); }
+        .nav-cta { font-weight: 700; color: var(--color-primary); }
+
+        /* Mobile Menu Toggle (Checkbox Hack) */
+        .menu-toggle { display: none; }
+        .menu-icon { display: none; cursor: pointer; padding: 10px; }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--color-surface);
+                flex-direction: column;
+                padding: var(--space-md);
+                border-bottom: 1px solid var(--color-border);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 99;
+                box-shadow: var(--shadow-md);
+            }
+
+            .menu-icon { display: block; }
+
+            /* When checkbox is checked, show menu */
+            #nav-toggle:checked ~ .nav-links {
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           4. HERO SECTION (Fonecta Style)
+           ========================================= */
+        .hero {
+            background-color: var(--color-primary);
+            color: white;
+            padding: var(--space-xl) 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search Bar Component */
+        .search-box {
+            background: var(--color-surface);
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            max-width: 850px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .input-group {
+            flex: 1 1 250px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            background: white;
+        }
+
+        .input-icon {
+            padding: 0 12px;
+            color: var(--color-text-muted);
+        }
+        
+        .input-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            padding: 14px 0;
+            font-size: 1rem;
+            outline: none;
+            color: var(--color-text-main);
+            background: transparent;
+        }
+
+        .search-btn {
+            flex: 0 0 auto;
+            min-width: 120px;
+        }
+
+        @media (max-width: 600px) {
+            .search-box { flex-direction: column; background: transparent; box-shadow: none; padding: 0; }
+            .search-btn { width: 100%; }
+            .input-group { border-color: transparent; box-shadow: var(--shadow-sm); }
+        }
+
+        /* =========================================
+           5. CATEGORIES GRID
+           ========================================= */
+        .section-header {
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+        .view-all { color: var(--color-accent); font-weight: 600; font-size: 0.9rem; }
+
+        .category-grid {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--space-sm);
+        }
+
+        .category-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: var(--space-md);
+            text-align: center;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 140px;
+        }
+
+        .category-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: var(--color-primary);
+        }
+
+        .cat-icon { margin-bottom: 12px; }
+        .cat-icon svg { width: 32px; height: 32px; fill: currentColor; opacity: 0.8; }
+        .cat-name { font-weight: 600; font-size: 0.95rem; }
+
+        /* =========================================
+           6. BUSINESS LISTINGS
+           ========================================= */
+        .listing-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            margin-bottom: var(--space-xl);
+        }
+
+        .business-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .business-card:hover { box-shadow: var(--shadow-md); border-color: #BDBDBD; }
+
+        .card-body { padding: var(--space-md); }
+
+        .biz-category {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .biz-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .biz-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .rating-badge {
+            background: #FFF8E1;
+            color: #F57F17;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .rating-badge svg { width: 12px; height: 12px; fill: currentColor; }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .contact-row svg { width: 16px; height: 16px; fill: var(--color-text-muted); }
+
+        .card-footer {
+            padding: var(--space-sm) var(--space-md);
+            background: #F1F3F5;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status {
+            font-size: 0.85rem;
+            color: var(--color-success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .status::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+        }
+
+        /* =========================================
+           7. FOOTER
+           ========================================= */
+        .site-footer {
+            background: var(--color-primary);
+            color: rgba(255,255,255,0.8);
+            padding: var(--space-xl) 0 var(--space-md);
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-col h3 { color: white; margin-bottom: var(--space-md); font-size: 1.1rem; }
+        .footer-col li { margin-bottom: 8px; }
+        .footer-col a:hover { color: white; text-decoration: underline; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: var(--space-md);
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="visually-hidden" style="position: absolute; width: auto; height: auto; padding: 10px; background: white; z-index: 999; clip: auto;">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4l6 12H6l6-12z"/></svg>
+                Index
+            </a>
+
+            <input type="checkbox" id="nav-toggle" class="menu-toggle">
+            <label for="nav-toggle" class="menu-icon" aria-label="Toggle Navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+            </label>
+
+            <nav class="nav-links">
+                <a href="#" class="nav-item">Categories</a>
+                <a href="#" class="nav-item">Map Search</a>
+                <a href="#" class="nav-item">About</a>
+                <a href="#" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Log in</a>
+                <a href="#" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Add Business</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Dominican Republic's Yellow Pages</h1>
+                <p class="hero-subtitle">Find reliable companies, services, and professionals from Santo Domingo to Punta Cana.</p>
+
+                <form action="/search" method="GET" class="search-box">
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </div>
+                        <input type="text" name="q" class="search-input" placeholder="What are you looking for?" aria-label="Search term">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        </div>
+                        <input type="text" name="loc" class="search-input" placeholder="Location (e.g., Santo Domingo)" value="Dominican Republic" aria-label="Location">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary search-btn">Search</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <h2 class="section-title">Browse Categories</h2>
+                <a href="#" class="view-all">View all categories &rarr;</a>
+            </div>
+
+            <div class="grid category-grid">
+                <a href="#" class="category-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg></div>
+                    <span class="cat-name">Restaurants</span>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+                    <span class="cat-name">Legal</span>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
+                    <span class="cat-name">Plumbers</span>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-2h8zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg></div>
+                    <span class="cat-name">Print & Copy</span>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M19 2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></div>
+                    <span class="cat-name">Health</span>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div>
+                    <span class="cat-name">Automotive</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <h2 class="section-title">Popular in Santo Domingo</h2>
+            </div>
+
+            <div class="grid listing-grid">
+                <article class="business-card">
+                    <div class="card-body">
+                        <div class="biz-category">Legal Services</div>
+                        <a href="#" class="biz-name">García & Associates</a>
+                        
+                        <div class="biz-meta">
+                            <span class="rating-badge">
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                4.9
+                            </span>
+                            <span>(84 reviews)</span>
+                        </div>
+
+                        <div class="contact-row">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Av. Winston Churchill, Santo Domingo</span>
+                        </div>
+                        <div class="contact-row">
+                             <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>(809) 555-0123</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status">Open Now</span>
+                        <a href="#" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">View Profile</a>
+                    </div>
+                </article>
+
+                <article class="business-card">
+                    <div class="card-body">
+                        <div class="biz-category">Home Services</div>
+                        <a href="#" class="biz-name">Dominican Cool Air</a>
+                        
+                        <div class="biz-meta">
+                            <span class="rating-badge">
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                4.7
+                            </span>
+                            <span>(120 reviews)</span>
+                        </div>
+
+                        <div class="contact-row">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Zona Colonial, Santo Domingo</span>
+                        </div>
+                        <div class="contact-row">
+                             <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>(829) 555-0987</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status">Open Now</span>
+                        <a href="#" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">View Profile</a>
+                    </div>
+                </article>
+
+                <article class="business-card">
+                    <div class="card-body">
+                        <div class="biz-category">Restaurants</div>
+                        <a href="#" class="biz-name">El Conuco</a>
+                        
+                        <div class="biz-meta">
+                            <span class="rating-badge">
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                4.8
+                            </span>
+                            <span>(340 reviews)</span>
+                        </div>
+
+                        <div class="contact-row">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Gazcue, Santo Domingo</span>
+                        </div>
+                        <div class="contact-row">
+                             <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>(809) 555-5678</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status" style="color: var(--color-text-muted);"><span style="background:var(--color-text-muted)"></span>Opens 11:00 AM</span>
+                        <a href="#" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">View Profile</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Index</h3>
+                    <p>Connecting the Dominican Republic.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Locations</a></li>
+                        <li><a href="#">Add Free Listing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">About Index</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Index Directory. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

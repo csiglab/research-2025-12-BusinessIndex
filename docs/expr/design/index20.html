@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Local Finder — Dominican Republic Business Yellow Pages</title>
+  <meta name="description" content="Comprehensive business directory for the Dominican Republic. Find local businesses, services, and contact information. Fast, accessible, and no JavaScript required." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #FFC107; /* Yellow Pages yellow */
+      --primary-dark: #FF8F00;
+      --secondary: #333333;
+      --accent: #E65100;
+      --light-bg: #FFF8E1;
+      --card-bg: #FFFFFF;
+      --border: #E0E0E0;
+      --text: #212121;
+      --text-light: #757575;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --radius: 8px;
+      --max-width: 1200px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color-scheme: light;
+    }
+
+    /* Reset and Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+    
+    html, body {
+      height: 100%;
+      background-color: #FAFAFA;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    a:hover, a:focus {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    
+    a:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 2px;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--secondary);
+    }
+    
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--secondary) 0%, #222 100%);
+      color: white;
+      padding: 16px 0;
+      border-bottom: 6px solid var(--primary);
+    }
+    
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .logo__mark {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+      font-weight: 900;
+      font-size: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .logo__text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .logo__title {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+    }
+    
+    .logo__subtitle {
+      font-size: 14px;
+      color: #E0E0E0;
+      margin-top: 4px;
+    }
+    
+    /* Navigation */
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .main-nav a {
+      color: white;
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+    }
+    
+    .main-nav a:hover,
+    .main-nav a:focus {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .main-nav a:hover::after,
+    .main-nav a:focus::after {
+      width: 100%;
+    }
+    
+    /* Hero Search */
+    .hero {
+      background: var(--light-bg);
+      padding: 40px 0;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .hero-title {
+      font-size: 36px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+    
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-light);
+      max-width: 800px;
+      margin-bottom: 32px;
+    }
+    
+    .search-card {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    
+    .search-form {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    @media (max-width: 900px) {
+      .search-form {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .search-form {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    
+    .form-input,
+    .form-select {
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 16px;
+      transition: border-color 0.2s ease;
+      background: white;
+    }
+    
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    
+    .search-btn {
+      background: var(--primary);
+      color: var(--secondary);
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px 24px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      align-self: flex-end;
+    }
+    
+    .search-btn:hover,
+    .search-btn:focus {
+      background: var(--primary-dark);
+    }
+    
+    /* Categories */
+    .categories-section {
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    
+    .category-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .category-card:hover,
+    .category-card:focus {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--primary);
+    }
+    
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--light-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: var(--accent);
+      font-size: 24px;
+    }
+    
+    .category-name {
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    
+    .category-count {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    
+    /* Business Listings */
+    .listings-section {
+      margin-bottom: 40px;
+    }
+    
+    .listings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .results-info {
+      font-size: 16px;
+      color: var(--text-light);
+    }
+    
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 24px;
+    }
+    
+    @media (max-width: 768px) {
+      .listings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .business-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .business-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    
+    .business-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .business-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--light-bg), #FFF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 24px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    
+    .business-info {
+      flex: 1;
+    }
+    
+    .business-name {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    
+    .business-category {
+      display: inline-block;
+      background: var(--light-bg);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    .business-address,
+    .business-hours,
+    .business-phone {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .business-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+    
+    .btn {
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: var(--secondary);
+    }
+    
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--primary-dark);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--secondary);
+      border: 2px solid var(--border);
+    }
+    
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      border-color: var(--primary);
+      background: var(--light-bg);
+    }
+    
+    /* Featured & Advertise */
+    .sidebar {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    
+    .featured-business {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .featured-business:last-child {
+      border-bottom: none;
+    }
+    
+    .featured-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--light-bg), #FFF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .advertise-box {
+      background: linear-gradient(135deg, var(--secondary), #444);
+      color: white;
+      padding: 32px;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    
+    .advertise-box h3 {
+      color: white;
+      margin-bottom: 12px;
+    }
+    
+    .advertise-box p {
+      margin-bottom: 20px;
+      color: #E0E0E0;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+    
+    .pagination a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius);
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+    
+    .pagination a:hover,
+    .pagination a:focus,
+    .pagination a.active {
+      background: var(--primary);
+      color: var(--secondary);
+      border-color: var(--primary);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      color: white;
+      padding: 40px 0 24px;
+      margin-top: 60px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-title {
+      color: white;
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+    
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #BDBDBD;
+    }
+    
+    .footer-links a:hover,
+    .footer-links a:focus {
+      color: var(--primary);
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid #444;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .copyright {
+      color: #9E9E9E;
+      font-size: 14px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .main-nav ul {
+        flex-wrap: wrap;
+      }
+      
+      .hero-title {
+        font-size: 28px;
+      }
+      
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      :root {
+        --primary: #000;
+        --secondary: #000;
+        --border: #000;
+        --text: #000;
+      }
+      
+      a {
+        text-decoration: underline;
+      }
+    }
+    
+    /* Print Styles */
+    @media print {
+      .search-card,
+      .sidebar,
+      .categories-grid,
+      .main-nav,
+      .advertise-box,
+      .business-actions {
+        display: none;
+      }
+      
+      .business-card {
+        break-inside: avoid;
+        border: 1px solid #000;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to Main Content Link -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo__mark" aria-hidden="true">LF</div>
+        <div class="logo__text">
+          <h1 class="logo__title">Local Finder</h1>
+          <div class="logo__subtitle">Dominican Republic Business Yellow Pages</div>
+        </div>
+      </div>
+      
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#listings">Business Listings</a></li>
+          <li><a href="#advertise">Advertise</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="container">
+    <!-- Hero Search Section -->
+    <section class="hero">
+      <h2 class="hero-title">Find Local Businesses in the Dominican Republic</h2>
+      <p class="hero-subtitle">Search our comprehensive directory of businesses, services, and shops. Fast, accessible, and completely free.</p>
+      
+      <div class="search-card">
+        <form class="search-form" action="/search" method="get" role="search" aria-label="Business Directory Search">
+          <div class="form-group">
+            <label for="search-query" class="form-label">What are you looking for?</label>
+            <input type="search" id="search-query" name="q" class="form-input" placeholder="e.g. Restaurant, Plumber, Hotel" aria-label="Search for business or service">
+          </div>
+          
+          <div class="form-group">
+            <label for="search-location" class="form-label">City or Province</label>
+            <input type="text" id="search-location" name="location" class="form-input" placeholder="e.g. Santo Domingo, Santiago" aria-label="Search location">
+          </div>
+          
+          <div class="form-group">
+            <label for="search-category" class="form-label">Category</label>
+            <select id="search-category" name="category" class="form-select" aria-label="Select business category">
+              <option value="">All Categories</option>
+              <option value="restaurants">Restaurants & Food</option>
+              <option value="health">Health & Medicine</option>
+              <option value="retail">Retail & Shopping</option>
+              <option value="services">Professional Services</option>
+              <option value="automotive">Automotive</option>
+              <option value="home">Home Services</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="search-btn">Search Directory</button>
+        </form>
+        
+        <div class="quick-links">
+          <p style="margin-bottom: 12px; font-weight: 600; color: var(--secondary);">Popular Searches:</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/search?q=pharmacy" class="btn-secondary" style="flex: 0 1 auto; padding: 8px 16px;">Pharmacies</a>
+            <a href="/search?q=restaurant" class="btn-secondary" style="flex: 0 1 auto; padding: 8px 16px;">Restaurants</a>
+            <a href="/search?q=mechanic" class="btn-secondary" style="flex: 0 1 auto; padding: 8px 16px;">Auto Repair</a>
+            <a href="/search?q=hotel" class="btn-secondary" style="flex: 0 1 auto; padding: 8px 16px;">Hotels</a>
+            <a href="/search?q=doctor" class="btn-secondary" style="flex: 0 1 auto; padding: 8px 16px;">Doctors</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories-section">
+      <h2 class="section-title">Browse by Category</h2>
+      <div class="categories-grid">
+        <a href="/category/restaurants" class="category-card">
+          <div class="category-icon" aria-hidden="true">🍽️</div>
+          <h3 class="category-name">Restaurants</h3>
+          <div class="category-count">1,245 listings</div>
+        </a>
+        
+        <a href="/category/health" class="category-card">
+          <div class="category-icon" aria-hidden="true">🏥</div>
+          <h3 class="category-name">Health & Medicine</h3>
+          <div class="category-count">892 listings</div>
+        </a>
+        
+        <a href="/category/retail" class="category-card">
+          <div class="category-icon" aria-hidden="true">🛍️</div>
+          <h3 class="category-name">Retail & Shopping</h3>
+          <div class="category-count">2,134 listings</div>
+        </a>
+        
+        <a href="/category/automotive" class="category-card">
+          <div class="category-icon" aria-hidden="true">🚗</div>
+          <h3 class="category-name">Automotive</h3>
+          <div class="category-count">567 listings</div>
+        </a>
+        
+        <a href="/category/services" class="category-card">
+          <div class="category-icon" aria-hidden="true">💼</div>
+          <h3 class="category-name">Professional Services</h3>
+          <div class="category-count">1,023 listings</div>
+        </a>
+        
+        <a href="/category/home" class="category-card">
+          <div class="category-icon" aria-hidden="true">🏠</div>
+          <h3 class="category-name">Home Services</h3>
+          <div class="category-count">743 listings</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Business Listings -->
+    <section id="listings" class="listings-section">
+      <div class="listings-header">
+        <h2 class="section-title">Featured Business Listings</h2>
+        <div class="results-info">Showing <strong>1-6</strong> of <strong>1,245</strong> businesses in Santo Domingo</div>
+      </div>
+      
+      <div class="listings-grid">
+        <!-- Business Card 1 -->
+        <article class="business-card">
+          <div class="business-header">
+            <div class="business-avatar" aria-hidden="true">BG</div>
+            <div class="business-info">
+              <h3 class="business-name">Boca Grande Seafood & Grill</h3>
+              <span class="business-category">Restaurant</span>
+              <div class="business-address">📍 Malecón, Santo Domingo</div>
+              <div class="business-hours">🕒 Open today: 11:00 AM - 10:00 PM</div>
+              <div class="business-phone">📞 <a href="tel:+18091234567">(809) 123-4567</a></div>
+            </div>
+          </div>
+          <p style="margin-bottom: 16px; color: var(--text-light);">Upscale seafood restaurant with ocean views. Specializing in fresh Dominican seafood and international cuisine.</p>
+          <div class="business-actions">
+            <a href="/business/boca-grande" class="btn btn-primary">View Details</a>
+            <a href="https://maps.google.com/?q=Boca+Grande+Seafood+Grill+Santo+Domingo" class="btn btn-secondary" rel="noopener">Map & Directions</a>
+          </div>
+        </article>
+        
+        <!-- Business Card 2 -->
+        <article class="business-card">
+          <div class="business-header">
+            <div class="business-avatar" aria-hidden="true">CV</div>
+            <div class="business-info">
+              <h3 class="business-name">Clínica Vida Salud</h3>
+              <span class="business-category">Medical Clinic</span>
+              <div class="business-address">📍 Av. Independencia 445, Santiago</div>
+              <div class="business-hours">🕒 Open today: 8:00 AM - 5:00 PM</div>
+              <div class="business-phone">📞 <a href="tel:+18092223344">(809) 222-3344</a></div>
+            </div>
+          </div>
+          <p style="margin-bottom: 16px; color: var(--text-light);">Full-service medical clinic offering general medicine, dentistry, and specialist consultations. Accepts most insurance plans.</p>
+          <div class="business-actions">
+            <a href="/business/clinica-vida-salud" class="btn btn-primary">View Details</a>
+            <a href="https://maps.google.com/?q=Clinica+Vida+Salud+Santiago" class="btn btn-secondary" rel="noopener">Map & Directions</a>
+          </div>
+        </article>
+        
+        <!-- Business Card 3 -->
+        <article class="business-card">
+          <div class="business-header">
+            <div class="business-avatar" aria-hidden="true">PA</div>
+            <div class="business-info">
+              <h3 class="business-name">Panadería Aroma</h3>
+              <span class="business-category">Bakery</span>
+              <div class="business-address">📍 Zona Colonial, Santo Domingo</div>
+              <div class="business-hours">🕒 Open today: 6:00 AM - 8:00 PM</div>
+              <div class="business-phone">📞 <a href="tel:+18099887766">(809) 988-7766</a></div>
+            </div>
+          </div>
+          <p style="margin-bottom: 16px; color: var(--text-light);">Traditional Dominican bakery offering fresh bread, pastries, cakes, and coffee. Family-owned since 1985.</p>
+          <div class="business-actions">
+            <a href="/business/panaderia-aroma" class="btn btn-primary">View Details</a>
+            <a href="https://maps.google.com/?q=Panaderia+Aroma+Zona+Colonial" class="btn btn-secondary" rel="noopener">Map & Directions</a>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Search Results Pages">
+        <a href="#" aria-label="Previous page">‹</a>
+        <a href="#" class="active" aria-label="Page 1">1</a>
+        <a href="#" aria-label="Page 2">2</a>
+        <a href="#" aria-label="Page 3">3</a>
+        <a href="#" aria-label="Page 4">4</a>
+        <a href="#" aria-label="Next page">›</a>
+      </nav>
+    </section>
+
+    <!-- Sidebar Content -->
+    <aside style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 60px;">
+      <div>
+        <!-- Featured Businesses -->
+        <div class="sidebar">
+          <h3 style="margin-bottom: 20px;">Recently Added Businesses</h3>
+          
+          <div class="featured-business">
+            <div class="featured-avatar" aria-hidden="true">AG</div>
+            <div>
+              <h4 style="margin-bottom: 4px;">AgroMarket DR</h4>
+              <p style="color: var(--text-light); font-size: 14px; margin-bottom: 4px;">Wholesale fruits & vegetables</p>
+              <p style="color: var(--text-light); font-size: 14px;">📍 Santiago | 📞 <a href="tel:+18095551234">(809) 555-1234</a></p>
+            </div>
+          </div>
+          
+          <div class="featured-business">
+            <div class="featured-avatar" aria-hidden="true">TC</div>
+            <div>
+              <h4 style="margin-bottom: 4px;">TechCorp Solutions</h4>
+              <p style="color: var(--text-light); font-size: 14px; margin-bottom: 4px;">IT Services & Support</p>
+              <p style="color: var(--text-light); font-size: 14px;">📍 Santo Domingo | 📞 <a href="tel:+18097778899">(809) 777-8899</a></p>
+            </div>
+          </div>
+          
+          <div class="featured-business">
+            <div class="featured-avatar" aria-hidden="true">CA</div>
+            <div>
+              <h4 style="margin-bottom: 4px;">Caribe Auto Repair</h4>
+              <p style="color: var(--text-light); font-size: 14px; margin-bottom: 4px;">Mechanic & Auto Services</p>
+              <p style="color: var(--text-light); font-size: 14px;">📍 Punta Cana | 📞 <a href="tel:+18096667788">(809) 666-7788</a></p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- About Section -->
+        <section id="about" style="margin-top: 40px;">
+          <h2 class="section-title">About Local Finder</h2>
+          <p style="margin-bottom: 16px; color: var(--text-light);">Local Finder is the Dominican Republic's most comprehensive business directory, designed with accessibility and usability at its core. Our mission is to connect people with local businesses through a fast, intuitive, and inclusive platform.</p>
+          <ul style="padding-left: 20px; color: var(--text-light);">
+            <li>No JavaScript required — works on all devices and browsers</li>
+            <li>WCAG 2.1 AA compliant — accessible to everyone</li>
+            <li>Mobile-first responsive design</li>
+            <li>Localized for the Dominican Republic</li>
+          </ul>
+        </section>
+      </div>
+      
+      <!-- Advertise Section -->
+      <div>
+        <div id="advertise" class="advertise-box">
+          <h3>Advertise Your Business</h3>
+          <p>Reach thousands of potential customers in the Dominican Republic. Get listed in our directory with premium placement options.</p>
+          <a href="/advertise" class="btn" style="background: var(--primary); color: var(--secondary); font-weight: 700; padding: 14px 24px; display: inline-block; border-radius: var(--radius);">Get Started Today</a>
+        </div>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="sidebar" style="margin-top: 24px;">
+          <h3 style="margin-bottom: 16px;">Contact Us</h3>
+          <p style="margin-bottom: 16px; color: var(--text-light);">Need help or have questions about our directory?</p>
+          <address style="font-style: normal; margin-bottom: 16px; color: var(--text-light);">
+            <strong>Local Finder DR</strong><br>
+            Av. 27 de Febrero #456<br>
+            Santo Domingo, Dominican Republic<br>
+            📞 <a href="tel:+18090001111">(809) 000-1111</a><br>
+            ✉️ <a href="mailto:info@localfinder.do">info@localfinder.do</a>
+          </address>
+          <a href="/contact" class="btn btn-primary" style="width: 100%;">Contact Form</a>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3 class="footer-title">Local Finder</h3>
+          <p style="color: #BDBDBD; margin-bottom: 20px;">The Dominican Republic's most trusted business directory. Connecting communities with local businesses since 2023.</p>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/categories">Business Categories</a></li>
+            <li><a href="/add-business">Add Your Business</a></li>
+            <li><a href="/advertise">Advertising</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Legal</h3>
+          <ul class="footer-links">
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/accessibility">Accessibility Statement</a></li>
+            <li><a href="/cookies">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="copyright">
+          &copy; 2023 Local Finder — Dominican Republic Business Directory. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <a href="/sitemap" style="color: #9E9E9E;">Sitemap</a>
+          <a href="/help" style="color: #9E9E9E;">Help Center</a>
+          <a href="/feedback" style="color: #9E9E9E;">Feedback</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

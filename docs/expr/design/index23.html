@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en-DO">
+<head>
+<meta charset="utf-8">
+<title>Index – Dominican Republic Business Directory</title>
+<meta name="description" content="Find trusted local businesses in the Dominican Republic. Search by location, service, or category.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* --------------------------------------------------------------
+   1. DESIGN TOKENS (Optimized for performance & clarity)
+   --------------------------------------------------------------
+*/
+:root {
+  /* Minimal Color Palette */
+  --bg-page:        #FFFFFF;
+  --bg-surface:     #F8F9FA;
+  --primary:        #2563EB; /* Blue 600 - Better contrast than violet */
+  --primary-dark:   #1D4ED8;
+  --text-main:      #1F2937; /* Gray 800 */
+  --text-muted:     #6B7280; /* Gray 500 */
+  --border:         #E5E7EB; /* Gray 200 */
+  --accent:         #059669; /* Green 600 */
+  
+  /* Typography */
+  --font-main:      'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Spacing & Layout */
+  --container:      min(90%, 1100px);
+  --radius-sm:      6px;
+  --radius-md:      8px;
+  --radius-full:    9999px;
+  
+  /* Shadows (Minimal) */
+  --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md:      0 4px 6px -1px rgba(0, 0, 0, 0.07);
+  --shadow-lg:      0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  
+  /* Transitions */
+  --transition:     150ms ease;
+}
+
+/* --------------------------------------------------------------
+   2. RESET & BASE STYLES
+   --------------------------------------------------------------
+*/
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Scale - More compact */
+h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; }
+h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
+h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.4; }
+p { color: var(--text-muted); margin-bottom: 1rem; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.75rem; }
+}
+
+a { 
+  color: var(--primary); 
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--primary-dark); }
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------
+   3. LAYOUT UTILITIES
+   --------------------------------------------------------------
+*/
+.container {
+  width: var(--container);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+}
+
+/* --------------------------------------------------------------
+   4. COMPONENTS
+   --------------------------------------------------------------
+*/
+
+/* --- Header & Navigation --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-main);
+}
+.logo .dot { color: var(--primary); }
+
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+}
+.nav-toggle:hover {
+  border-color: var(--primary);
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 1rem;
+  box-shadow: var(--shadow-md);
+}
+.nav-menu.active { display: block; }
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.nav-links a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+.nav-links a:hover {
+  background: var(--bg-surface);
+  color: var(--primary);
+}
+
+@media (min-width: 768px) {
+  .nav-toggle { display: none; }
+  .nav-menu {
+    display: block;
+    position: static;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  .nav-links {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    padding: 0.5rem 0.75rem;
+  }
+  .cta-button {
+    margin-left: 1rem;
+  }
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border);
+}
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* --- Search Component (Prominent) --- */
+.search-section {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 0;
+}
+
+.search-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .search-form {
+    flex-direction: row;
+  }
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  background: white;
+}
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem;
+  min-width: 120px;
+}
+
+.search-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+.search-examples span {
+  color: var(--text-muted);
+}
+.search-examples a {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+.search-examples a:hover {
+  color: var(--primary);
+}
+
+/* --- Categories Grid --- */
+.categories {
+  padding: 2rem 0;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 0.75rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all var(--transition);
+}
+.category-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.category-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface);
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+
+.category-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-main);
+}
+
+/* --- Business Listings --- */
+.listings-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .listings-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.listing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .listing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .listing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.listing-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition);
+}
+.listing-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.listing-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+}
+.badge-open { background: #D1FAE5; color: var(--accent); }
+.badge-24h { background: #EFF6FF; color: var(--primary); }
+
+.listing-content {
+  padding: 1.25rem;
+}
+
+.listing-title {
+  margin-bottom: 0.5rem;
+}
+
+.listing-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.listing-description {
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-muted);
+}
+
+.listing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.listing-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+
+.view-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.view-link:hover span {
+  transform: translateX(3px);
+}
+.view-link span {
+  transition: transform var(--transition);
+}
+
+/* --- Contact Section --- */
+.contact-section {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.contact-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.info-item h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* --- Footer --- */
+.site-footer {
+  background: var(--text-main);
+  color: #9CA3AF;
+  padding: 3rem 0 1.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.footer-brand h3 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.footer-column h4 {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.footer-links a {
+  color: #9CA3AF;
+  font-size: 0.875rem;
+}
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  padding-top: 1.5rem;
+  border-top: 1px solid #374151;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* --------------------------------------------------------------
+   5. ACCESSIBILITY ENHANCEMENTS
+   --------------------------------------------------------------
+*/
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #003CC5;
+    --text-main: #000000;
+    --border: #000000;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem;
+  z-index: 1000;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+}
+</style>
+</head>
+
+<body>
+  <!-- Skip to main content link for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-content">
+      <a href="/" class="logo" aria-label="Index- Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        Index
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav id="nav-menu" class="nav-menu" aria-label="Main navigation">
+        <div class="nav-links">
+          <a href="#search">Search</a>
+          <a href="#categories">Categories</a>
+          <a href="#listings">Top Rated</a>
+          <a href="#contact">Add Business</a>
+          <a href="#contact" class="btn cta-button">For Businesses</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Search Section - Prominent Position -->
+    <section id="search" class="section search-section" aria-labelledby="search-heading">
+      <div class="container">
+        <div class="search-wrapper">
+          <h1 id="search-heading" class="search-label">Find businesses in the Dominican Republic</h1>
+          <form class="search-form" role="search">
+            <label for="search-input" class="sr-only">Search for businesses, services, or locations</label>
+            <input 
+              type="search" 
+              id="search-input" 
+              class="search-input" 
+              placeholder="e.g., plumber, restaurant in Santo Domingo, dentist..."
+              aria-describedby="search-examples"
+            >
+            <button type="submit" class="btn btn-primary search-button">
+              Search
+            </button>
+          </form>
+          <div id="search-examples" class="search-examples">
+            <span>Popular: </span>
+            <a href="#restaurants">Restaurants</a>
+            <a href="#plumbers">Plumbers</a>
+            <a href="#doctors">Doctors</a>
+            <a href="#lawyers">Lawyers</a>
+            <a href="#hotels">Hotels</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="section categories" aria-labelledby="categories-heading">
+      <div class="container">
+        <h2 id="categories-heading">Browse by Category</h2>
+        <div class="category-grid">
+          <a href="#" class="category-card">
+            <div class="category-icon">🍽️</div>
+            <div class="category-name">Restaurants</div>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🏠</div>
+            <div class="category-name">Real Estate</div>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">⚕️</div>
+            <div class="category-name">Health</div>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🔧</div>
+            <div class="category-name">Services</div>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">⚖️</div>
+            <div class="category-name">Legal</div>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🚗</div>
+            <div class="category-name">Automotive</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Rated Listings -->
+    <section id="listings" class="section" aria-labelledby="listings-heading">
+      <div class="container">
+        <div class="listings-header">
+          <div>
+            <h2 id="listings-heading">Top Rated Businesses</h2>
+            <p>Highly recommended by our community</p>
+          </div>
+          <a href="#" class="btn btn-secondary">View All</a>
+        </div>
+
+        <div class="listing-grid">
+          <!-- Listing 1 -->
+          <article class="listing-card">
+            <div class="listing-content">
+              <span class="listing-badge badge-open">Open Now</span>
+              <h3 class="listing-title">Zona Colonial Coffee Roasters</h3>
+              <div class="listing-meta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Santo Domingo • 0.8 km</span>
+              </div>
+              <p class="listing-description">Artisan micro-roastery serving Dominican organic blends. Famous for breakfast & local pastries.</p>
+              <div class="listing-footer">
+                <div class="listing-tags">
+                  <span class="tag">Coffee</span>
+                  <span class="tag">Breakfast</span>
+                </div>
+                <a href="#" class="view-link">
+                  Details <span>→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Listing 2 -->
+          <article class="listing-card">
+            <div class="listing-content">
+              <span class="listing-badge badge-24h">24/7 Service</span>
+              <h3 class="listing-title">Ramirez Plumbing Services</h3>
+              <div class="listing-meta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Santiago de los Caballeros</span>
+              </div>
+              <p class="listing-description">Certified Master plumber. Leak detection, pipe repair, and installations. Fixed quotes in DOP.</p>
+              <div class="listing-footer">
+                <div class="listing-tags">
+                  <span class="tag">Plumbing</span>
+                  <span class="tag">Emergency</span>
+                </div>
+                <a href="#" class="view-link">
+                  Details <span>→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Listing 3 -->
+          <article class="listing-card">
+            <div class="listing-content">
+              <span class="listing-badge badge-open">Accepting Patients</span>
+              <h3 class="listing-title">Clinica Dental Dr. Perez</h3>
+              <div class="listing-meta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Piantini, Santo Domingo</span>
+              </div>
+              <p class="listing-description">Specialized in orthodontics and cosmetic dentistry. English and Spanish spoken.</p>
+              <div class="listing-footer">
+                <div class="listing-tags">
+                  <span class="tag">Dentist</span>
+                  <span class="tag">Health</span>
+                </div>
+                <a href="#" class="view-link">
+                  Details <span>→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Add Business -->
+    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading">Add Your Business</h2>
+        <div class="contact-grid">
+          <form class="contact-form" aria-labelledby="contact-form-heading">
+            <h3 id="contact-form-heading" class="sr-only">Business Submission Form</h3>
+            <div class="form-group">
+              <label for="business-name">Business Name *</label>
+              <input type="text" id="business-name" name="business-name" required>
+            </div>
+            <div class="form-group">
+              <label for="category">Category *</label>
+              <select id="category" name="category" required>
+                <option value="">Select a category</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="service">Service</option>
+                <option value="retail">Retail</option>
+                <option value="professional">Professional</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="city">City *</label>
+              <select id="city" name="city" required>
+                <option value="">Select a city</option>
+                <option value="santo-domingo">Santo Domingo</option>
+                <option value="santiago">Santiago</option>
+                <option value="punta-cana">Punta Cana</option>
+                <option value="la-romana">La Romana</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Business</button>
+          </form>
+          <div class="contact-info">
+            <div class="info-item">
+              <h4>Why List Your Business?</h4>
+              <p>Reach more customers, improve visibility, and get verified reviews from the Dominican community.</p>
+            </div>
+            <div class="info-item">
+              <h4>Verification Process</h4>
+              <p>We verify all businesses to ensure quality and reliability for our users.</p>
+            </div>
+            <div class="info-item">
+              <h4>Need Help?</h4>
+              <p>Email: <a href="mailto:business@index.do">business@index.do</a></p>
+              <p>Phone: <a href="tel:+18091234567">(809) 123-4567</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Index.do</h3>
+          <p>The Dominican Republic's trusted business directory. Connecting quality professionals with local customers since 2024.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <div class="footer-links">
+            <a href="#restaurants">Restaurants</a>
+            <a href="#real-estate">Real Estate</a>
+            <a href="#health">Health & Beauty</a>
+            <a href="#services">Home Services</a>
+            <a href="#legal">Legal Services</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>For Businesses</h4>
+          <div class="footer-links">
+            <a href="#add">Add Business</a>
+            <a href="#advertise">Advertise</a>
+            <a href="#login">Business Login</a>
+            <a href="#success">Success Stories</a>
+            <a href="#pricing">Pricing</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="#about">About Us</a>
+            <a href="#careers">Careers</a>
+            <a href="#contact">Contact</a>
+            <a href="#press">Press</a>
+            <a href="#blog">Blog</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Index.do. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms of Service</a>
+          <a href="#cookies">Cookie Policy</a>
+          <a href="#accessibility">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Simple mobile navigation toggle without JavaScript -->
+  <script>
+    // Minimal JavaScript only for mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      const menu = document.getElementById('nav-menu');
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      
+      this.setAttribute('aria-expanded', !isExpanded);
+      menu.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('nav-menu');
+      const toggle = document.querySelector('.nav-toggle');
+      
+      if (window.innerWidth < 768 && 
+          !menu.contains(event.target) && 
+          !toggle.contains(event.target) && 
+          menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>

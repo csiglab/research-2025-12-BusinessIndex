@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Index – The DR Business Directory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The Dominican Republic's trusted yellow pages. Find local businesses in Santo Domingo, Santiago, and beyond.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========  DESIGN TOKENS (MATERIAL YOU / MD3)  ========= */
+:root {
+  /* ----- Palette: Purple Seed #6750A4 ----- */
+  --md-primary: #6750A4;
+  --md-on-primary: #FFFFFF;
+  
+  --md-secondary-container: #E8DEF8;
+  --md-on-secondary-container: #1D192B;
+  
+  --md-tertiary: #7D5260;
+  
+  /* Surface Tones (The "White" replacements) */
+  --md-surface: #FFFBFE;      /* Page background */
+  --md-surface-container: #F3EDF7; /* Card background */
+  --md-surface-muted: #E7E0EC;     /* Input background */
+  
+  /* Text & Borders */
+  --md-on-surface: #1C1B1F;       /* Primary Text */
+  --md-on-surface-var: #49454F;   /* Secondary Text */
+  --md-outline: #79747E;          /* Borders */
+  
+  /* Shapes */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 48px;
+  --radius-pill: 9999px;
+
+  /* Shadows (Elevation) */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 40px rgba(103, 80, 164, 0.2);
+
+  /* Animation */
+  --ease-md3: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ----- Reset & Base ----- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--md-surface);
+  color: var(--md-on-surface);
+  line-height: 1.5;
+  overflow-x: hidden; /* For background blobs */
+}
+
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+img { max-width: 100%; display: block; }
+button { font: inherit; background: transparent; border: 0; cursor: pointer; }
+
+/* ----- Global Layout ----- */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ----- Atmospheric Background (The "Bold Factor") ----- */
+.atmosphere {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--md-primary);
+  top: -200px;
+  left: -200px;
+}
+
+.blob-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--md-tertiary);
+  bottom: -100px;
+  right: -100px;
+}
+
+/* ----- Typography Helpers ----- */
+h1 { font-size: 3rem; letter-spacing: -0.02em; line-height: 1.2; font-weight: 500; color: var(--md-on-surface); }
+h2 { font-size: 2rem; font-weight: 500; margin-bottom: 2rem; }
+h3 { font-size: 1.35rem; font-weight: 500; }
+.text-body { font-size: 1rem; color: var(--md-on-surface-var); }
+.text-label { font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; }
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+
+/* --- Header --- */
+header {
+  padding: 1rem 0;
+  background: rgba(255, 251, 254, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(121, 116, 126, 0.1);
+}
+
+.top-bar { display: flex; align-items: center; justify-content: space-between; }
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--md-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+nav { display: flex; gap: 0.5rem; }
+
+/* Ghost Buttons for Nav */
+.nav-link {
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-pill);
+  color: var(--md-on-surface-var);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.3s var(--ease-md3);
+}
+
+.nav-link:hover {
+  background-color: rgba(103, 80, 164, 0.08); /* State Layer: Primary 8% */
+  color: var(--md-on-surface);
+}
+
+.btn-primary-small {
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.3s var(--ease-md3);
+}
+.btn-primary-small:hover {
+  box-shadow: var(--shadow-md);
+  opacity: 0.9; /* State layer */
+}
+
+/* --- Hero --- */
+.hero {
+  padding: 5rem 0 4rem;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 { margin-bottom: 1rem; }
+.hero p { 
+  font-size: 1.25rem; 
+  color: var(--md-on-surface-var); 
+  max-width: 600px; 
+  margin: 0 auto 3rem; 
+}
+
+/* --- MD3 Filled Search Field --- */
+.search-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--md-surface-container);
+  border-radius: var(--radius-xl); /* Large radius for container */
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255,255,255,0.5);
+  transition: box-shadow 0.3s var(--ease-md3);
+}
+
+.search-container:hover, .search-container:focus-within {
+  box-shadow: var(--shadow-md);
+}
+
+/* The actual input structure */
+.input-wrapper {
+  flex: 1;
+  position: relative;
+  background: var(--md-surface-muted);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0; /* Rounded top */
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--md-outline); /* Resting border */
+  transition: background 0.2s;
+}
+
+.input-wrapper:focus-within::after {
+  background: var(--md-primary); /* Focus border */
+  height: 2px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 1.5rem 1rem 0.5rem; /* Space for label */
+  font-size: 1rem;
+  color: var(--md-on-surface);
+  outline: none;
+  font-family: inherit;
+}
+
+.floating-label {
+  position: absolute;
+  left: 1rem;
+  top: 18px;
+  font-size: 1rem;
+  color: var(--md-on-surface-var);
+  pointer-events: none;
+  transition: 0.2s var(--ease-md3);
+}
+
+/* CSS-only floating label simulation for when user focuses or types */
+.input-wrapper input:focus + .floating-label,
+.input-wrapper input:not(:placeholder-shown) + .floating-label {
+  top: 6px;
+  font-size: 0.75rem;
+  color: var(--md-primary);
+}
+
+.search-btn {
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  height: 56px;
+  padding: 0 2rem;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.3s var(--ease-md3);
+  font-size: 1rem;
+}
+
+.search-btn:hover {
+  opacity: 0.9;
+  box-shadow: var(--shadow-md);
+}
+
+.search-btn:active {
+  transform: scale(0.95); /* Tactile feedback */
+}
+
+/* --- Categories (Chips) --- */
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.chip {
+  background: var(--md-surface-container);
+  border: 1px solid var(--md-outline);
+  color: var(--md-on-surface-var);
+  padding: 0.5rem 1rem;
+  border-radius: 8px; /* Small radius for chips per spec override or stick to pills? MD3 uses 8px usually */
+  border-radius: var(--radius-pill); /* Let's stick to pills for MD3 consistency */
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  background: var(--md-secondary-container);
+  color: var(--md-on-secondary-container);
+  border-color: transparent;
+}
+
+/* --- Card Grid --- */
+section { padding: 4rem 0; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* MD3 Card Style */
+.card {
+  background: var(--md-surface-container);
+  border-radius: var(--radius-lg); /* 24px Radius */
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.3s var(--ease-md3);
+  position: relative;
+  border: 1px solid transparent;
+  /* Elevation 0 by default (just tonal diff), or shadow-sm */
+  box-shadow: none; 
+}
+
+.card:hover {
+  transform: translateY(-4px); /* Slight lift */
+  box-shadow: var(--shadow-md); /* Elevation 2 */
+  background: #EEE6F3; /* Slightly darker container on hover */
+}
+
+.card:active {
+  transform: scale(0.98); /* Tactile click */
+}
+
+.card h3 {
+  color: var(--md-on-surface);
+  margin-bottom: 0.25rem;
+}
+
+.card .meta {
+  font-size: 0.875rem;
+  color: var(--md-on-surface-var);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #369b59; /* Green for open */
+}
+.status-dot.closed { background: #b3261e; }
+
+.card p {
+  color: var(--md-on-surface-var);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.tags { display: flex; gap: 0.5rem; margin-top: auto; }
+
+.tag-mini {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--md-surface); /* Lightest surface against container */
+  border-radius: var(--radius-pill);
+  color: var(--md-on-surface-var);
+}
+
+.card-link {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+}
+.card-link:focus {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 4px;
+}
+
+/* --- Footer --- */
+footer {
+  background: var(--md-surface-container);
+  padding: 3rem 0;
+  margin-top: 4rem;
+  text-align: center;
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+.footer-links a:hover { text-decoration: underline; color: var(--md-primary); }
+.copyright { color: var(--md-on-surface-var); font-size: 0.75rem; }
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  h1 { font-size: 2.2rem; }
+  .hero { padding: 3rem 0; }
+  .search-container { flex-direction: column; background: transparent; box-shadow: none; border: none; padding: 0; }
+  .input-wrapper { border-radius: var(--radius-sm) var(--radius-sm) 0 0; width: 100%; }
+  .search-btn { width: 100%; margin-top: 1rem; }
+  .top-bar { flex-direction: column; gap: 1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="atmosphere">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+</div>
+
+<header>
+  <div class="container top-bar">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="var(--md-primary)"/>
+        <circle cx="12" cy="9" r="2.5" fill="white"/>
+      </svg>
+      Index
+    </div>
+    <nav aria-label="Primary">
+      <a href="#" class="nav-link">Browse</a>
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="btn-primary-small">Add Business</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Dominican Republic's<br>Trusted Directory</h1>
+      <p>Connect with top-rated local businesses, from Santo Domingo to Punta Cana.</p>
+
+      <form class="search-container" role="search" action="#" method="get">
+        <div class="input-wrapper">
+          <input type="text" id="q" name="q" placeholder=" " required>
+          <label for="q" class="floating-label">Search businesses (e.g. Plomero, Restaurante)...</label>
+        </div>
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+
+      <div class="categories">
+        <a href="#" class="chip">Restaurants</a>
+        <a href="#" class="chip">Legal Services</a>
+        <a href="#" class="chip">Plumbing</a>
+        <a href="#" class="chip">Hotels</a>
+        <a href="#" class="chip">Auto Repair</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="browse">
+    <div class="container">
+      <h2>Popular in Santo Domingo</h2>
+      
+      <div class="card-grid">
+        <article class="card">
+          <div class="text-content">
+            <h3>Zona Colonial Café</h3>
+            <div class="meta">
+              <span class="status-dot"></span> 
+              <span>Open • Closes 8 PM</span>
+            </div>
+            <p>Artisan coffee roasters located in the heart of the historic district. Best Dominican breakfast.</p>
+            <div class="tags">
+              <span class="tag-mini">Cafetería</span>
+              <span class="tag-mini">Zona Colonial</span>
+            </div>
+          </div>
+          <a href="#" class="card-link" aria-label="View details for Zona Colonial Café"></a>
+        </article>
+
+        <article class="card">
+          <div class="text-content">
+            <h3>Servicios Legales Rodriguez</h3>
+            <div class="meta">
+              <span class="status-dot"></span> 
+              <span>Open • 9 AM - 5 PM</span>
+            </div>
+            <p>Certified attorneys specializing in immigration, property law, and business incorporation.</p>
+            <div class="tags">
+              <span class="tag-mini">Abogados</span>
+              <span class="tag-mini">Legal</span>
+            </div>
+          </div>
+          <a href="#" class="card-link" aria-label="View details for Servicios Legales Rodriguez"></a>
+        </article>
+
+        <article class="card">
+          <div class="text-content">
+            <h3>Farmacia Los Hidalgos</h3>
+            <div class="meta">
+              <span class="status-dot"></span> 
+              <span>24 Hour Service</span>
+            </div>
+            <p>Trusted pharmaceutical services, delivery available throughout Naco and Piantini.</p>
+            <div class="tags">
+              <span class="tag-mini">Farmacia</span>
+              <span class="tag-mini">Salud</span>
+            </div>
+          </div>
+          <a href="#" class="card-link" aria-label="View details for Farmacia Los Hidalgos"></a>
+        </article>
+
+        <article class="card">
+          <div class="text-content">
+            <h3>Plomería Express SD</h3>
+            <div class="meta">
+              <span class="status-dot closed"></span> 
+              <span>Emergency Only</span>
+            </div>
+            <p>Rapid response plumbing for residential and commercial issues. 5-year warranty on labor.</p>
+            <div class="tags">
+              <span class="tag-mini">Plomero</span>
+              <span class="tag-mini">Servicios</span>
+            </div>
+          </div>
+          <a href="#" class="card-link" aria-label="View details for Plomería Express SD"></a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Add Your Business</a>
+    </div>
+    <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Index Dominicana. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

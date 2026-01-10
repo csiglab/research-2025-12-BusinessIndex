@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Finder - Business Directory for the Dominican Republic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a5c82;
+            --secondary-color: #e63946;
+            --accent-color: #f4a261;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+        
+        .logo-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav a:hover,
+        nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 30px 0 60px;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(42, 92, 130, 0.9), rgba(42, 92, 130, 0.8)), url('https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 50px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Search Section */
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .search-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .search-field label {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .search-input {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(42, 92, 130, 0.1);
+        }
+        
+        .search-button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .search-button:hover {
+            background-color: #c1121f;
+        }
+        
+        /* Categories */
+        .categories {
+            margin: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .category-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .category-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        /* Featured Businesses */
+        .featured-businesses {
+            margin: 60px 0;
+        }
+        
+        .businesses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .business-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .business-image {
+            height: 180px;
+            background-color: #e9ecef;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .business-content {
+            padding: 20px;
+        }
+        
+        .business-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .business-category {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: var(--gray-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .business-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .business-info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-color);
+        }
+        
+        .business-rating {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: #b0b7c3;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #495057;
+            color: #b0b7c3;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            nav ul {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 60px 0;
+                margin-bottom: 30px;
+            }
+            
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .search-container {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .hero h1 {
+                font-size: 26px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .categories-grid,
+            .businesses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        a:focus,
+        button:focus,
+        input:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        /* Print styles */
+        @media print {
+            header, footer, .search-container, .categories, .hero {
+                display: none;
+            }
+            
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .business-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <a href="#" class="logo">
+                    <i class="fas fa-map-marked-alt logo-icon"></i>
+                    <div class="logo-text">Local<span>Finder</span></div>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#">Businesses</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Cities</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Find Local Businesses in the Dominican Republic</h1>
+                <p>Discover restaurants, shops, services, and more in Santo Domingo, Santiago, Punta Cana, and across the Dominican Republic.</p>
+            </div>
+        </section>
+        
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-container">
+                <h2 class="sr-only">Business Search</h2>
+                <form action="#" method="get" class="search-box">
+                    <div class="search-field">
+                        <label for="search-term">What are you looking for?</label>
+                        <input type="text" id="search-term" class="search-input" placeholder="Restaurant, hotel, pharmacy, etc.">
+                    </div>
+                    
+                    <div class="search-field">
+                        <label for="location">Where? (City, town or region)</label>
+                        <input type="text" id="location" class="search-input" placeholder="Santo Domingo, Punta Cana, etc.">
+                    </div>
+                    
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-search"></i> Search Businesses
+                    </button>
+                </form>
+            </section>
+            
+            <!-- Categories Section -->
+            <section class="categories">
+                <h2 class="section-title">Browse by Category</h2>
+                <div class="categories-grid">
+                    <a href="#" class="category-card">
+                        <i class="fas fa-utensils category-icon"></i>
+                        <h3>Restaurants & Food</h3>
+                        <p>Discover local eateries and international cuisine</p>
+                    </a>
+                    
+                    <a href="#" class="category-card">
+                        <i class="fas fa-bed category-icon"></i>
+                        <h3>Hotels & Accommodation</h3>
+                        <p>Find places to stay across the Dominican Republic</p>
+                    </a>
+                    
+                    <a href="#" class="category-card">
+                        <i class="fas fa-shopping-bag category-icon"></i>
+                        <h3>Shopping</h3>
+                        <p>Stores, markets and shopping centers</p>
+                    </a>
+                    
+                    <a href="#" class="category-card">
+                        <i class="fas fa-car category-icon"></i>
+                        <h3>Auto Services</h3>
+                        <p>Car rentals, repairs and maintenance</p>
+                    </a>
+                    
+                    <a href="#" class="category-card">
+                        <i class="fas fa-heartbeat category-icon"></i>
+                        <h3>Health & Medical</h3>
+                        <p>Clinics, pharmacies and healthcare services</p>
+                    </a>
+                    
+                    <a href="#" class="category-card">
+                        <i class="fas fa-graduation-cap category-icon"></i>
+                        <h3>Education</h3>
+                        <p>Schools, universities and training centers</p>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Featured Businesses Section -->
+            <section class="featured-businesses">
+                <h2 class="section-title">Featured Businesses</h2>
+                <div class="businesses-grid">
+                    <!-- Business 1 -->
+                    <article class="business-card">
+                        <div class="business-image" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="business-content">
+                            <h3 class="business-title">La Casita de Papi</h3>
+                            <span class="business-category">Dominican Restaurant</span>
+                            <div class="business-info">
+                                <div><i class="fas fa-map-marker-alt"></i> <span>Zona Colonial, Santo Domingo</span></div>
+                                <div><i class="fas fa-phone"></i> <span>(809) 555-1234</span></div>
+                                <div><i class="fas fa-star business-rating"></i> <span>4.5 (128 reviews)</span></div>
+                            </div>
+                            <p>Authentic Dominican cuisine in a charming colonial setting. Known for its mofongo and fresh seafood.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Business 2 -->
+                    <article class="business-card">
+                        <div class="business-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="business-content">
+                            <h3 class="business-title">Caribe Tours</h3>
+                            <span class="business-category">Transportation Service</span>
+                            <div class="business-info">
+                                <div><i class="fas fa-map-marker-alt"></i> <span>Av. 27 de Febrero, Santo Domingo</span></div>
+                                <div><i class="fas fa-phone"></i> <span>(809) 221-4422</span></div>
+                                <div><i class="fas fa-star business-rating"></i> <span>4.2 (89 reviews)</span></div>
+                            </div>
+                            <p>Reliable bus transportation service connecting major cities across the Dominican Republic.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Business 3 -->
+                    <article class="business-card">
+                        <div class="business-image" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="business-content">
+                            <h3 class="business-title">Farmacia Carol</h3>
+                            <span class="business-category">Pharmacy</span>
+                            <div class="business-info">
+                                <div><i class="fas fa-map-marker-alt"></i> <span>Punta Cana Village</span></div>
+                                <div><i class="fas fa-phone"></i> <span>(809) 555-9876</span></div>
+                                <div><i class="fas fa-star business-rating"></i> <span>4.7 (204 reviews)</span></div>
+                            </div>
+                            <p>24-hour pharmacy with delivery service. Wide selection of medications and health products.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Local Finder</h3>
+                    <p>The Dominican Republic's most comprehensive business directory. Find local services, restaurants, shops and more across the country.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Add Your Business</a></li>
+                        <li><a href="#">Advertising</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Popular Cities</h3>
+                    <ul>
+                        <li><a href="#">Santo Domingo</a></li>
+                        <li><a href="#">Santiago de los Caballeros</a></li>
+                        <li><a href="#">Punta Cana</a></li>
+                        <li><a href="#">Puerto Plata</a></li>
+                        <li><a href="#">La Romana</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. George Washington, Santo Domingo</li>
+                        <li><i class="fas fa-phone"></i> (809) 555-4321</li>
+                        <li><i class="fas fa-envelope"></i> info@localfinder.do</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Local Finder - Business Directory for the Dominican Republic. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Simple mobile menu toggle without JavaScript -->
+    <script>
+        // Simple script for mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav ul').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

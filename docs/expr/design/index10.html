@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index - Dominican Business Directory</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* --- DESIGN TOKENS --- */
+        :root {
+            /* Palette */
+            --bg-canvas: #FFFFFF;
+            --bg-muted: #F3F4F6; /* Gray 100 */
+            --bg-subtle: #F9FAFB; /* Gray 50 */
+            
+            --text-main: #111827; /* Gray 900 */
+            --text-muted: #6B7280; /* Gray 500 */
+            
+            --primary: #3B82F6; /* Blue 500 */
+            --primary-dark: #2563EB; /* Blue 600 */
+            --secondary: #10B981; /* Emerald 500 */
+            --accent: #F59E0B; /* Amber 500 */
+            
+            --border: #E5E7EB; /* Gray 200 */
+            
+            /* Spacing & Layout */
+            --container-width: 1200px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        /* Typography Utilities */
+        .text-center { text-align: center; }
+        .font-bold { font-weight: 700; }
+        .font-extra { font-weight: 800; }
+        .text-primary { color: var(--primary); }
+        .text-accent { color: var(--accent); }
+        .text-muted { color: var(--text-muted); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Button Component */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s var(--ease-out);
+            border: none;
+            cursor: pointer;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-main);
+            background-color: var(--text-main);
+            color: white;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-main);
+        }
+        
+        .btn-ghost:hover {
+            background-color: var(--bg-muted);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--bg-canvas);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-inner {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            background-color: var(--bg-muted);
+            padding: 60px 0 40px; /* Reduced from 120px 0 100px */
+            overflow: hidden;
+        }
+
+        /* Geometric Decoration - Made smaller */
+        .geo-shape {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .shape-circle {
+            width: 200px; /* Reduced from 300px */
+            height: 200px; /* Reduced from 300px */
+            background-color: #E0E7FF; /* Light Indigo */
+            border-radius: 50%;
+            top: -30px; /* Reduced from -50px */
+            right: -30px; /* Reduced from -50px */
+        }
+        .shape-square {
+            width: 150px; /* Reduced from 200px */
+            height: 150px; /* Reduced from 200px */
+            background-color: #FEF3C7; /* Light Amber */
+            bottom: -30px; /* Reduced from -50px */
+            left: -30px; /* Reduced from -50px */
+            transform: rotate(15deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px; /* Reduced from 800px */
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem; /* Reduced from 4rem */
+            line-height: 1.2; /* Adjusted from 1.1 */
+            margin-bottom: 16px; /* Reduced from 24px */
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 1rem; /* Reduced from 1.25rem */
+            color: var(--text-muted);
+            margin-bottom: 32px; /* Reduced from 48px */
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 550px; /* Reduced from 650px */
+            margin: 0 auto;
+        }
+        
+        /* FIX: Added missing style to correctly position Lucide icon inside search wrapper */
+        .search-wrapper .search-icon {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        /* END FIX */
+
+        .search-input {
+            width: 100%;
+            padding: 18px 18px 18px 56px; /* Reduced padding */
+            font-size: 16px; /* Reduced from 18px */
+            border: 2px solid transparent;
+            background-color: var(--bg-canvas);
+            border-radius: var(--radius-lg);
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px; /* Adjusted from 24px */
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 8px; /* Adjusted from 12px */
+            top: 8px; /* Adjusted from 12px */
+            bottom: 8px; /* Adjusted from 12px */
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 20px; /* Reduced from 0 24px */
+            font-weight: 600;
+            font-size: 14px; /* Reduced from 16px */
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* --- CATEGORIES --- */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .cat-card {
+            background-color: var(--bg-muted);
+            padding: 32px 24px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cat-card:hover {
+            background-color: #E5E7EB; /* Gray 200 */
+            transform: scale(1.02);
+        }
+
+        .cat-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background-color: var(--bg-canvas);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .cat-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .cat-card span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- LISTINGS --- */
+        .listing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .listing-card {
+            background-color: var(--bg-canvas);
+            border: 2px solid var(--bg-muted);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .listing-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .listing-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background-color: var(--bg-muted);
+        }
+
+        .listing-body {
+            padding: 24px;
+        }
+
+        .listing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .listing-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .rating-badge {
+            background-color: #FEF3C7;
+            color: #D97706;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .listing-meta {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .listing-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background-color: var(--bg-muted);
+            color: var(--text-main);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .listing-footer {
+            padding-top: 16px;
+            border-top: 2px solid var(--bg-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .link-action {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .link-action:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* --- CTA --- */
+        .cta-section {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: white;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-white {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-white:hover {
+            background-color: var(--bg-muted);
+            transform: scale(1.05);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-main);
+            color: #9CA3AF;
+            padding: 80px 0 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-heading {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .socials {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-icon {
+            color: white;
+            transition: transform 0.2s;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: var(--primary);
+        }
+
+        .copyright {
+            border-top: 1px solid #374151;
+            padding-top: 32px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 40px 0 30px; }
+            .header-inner { flex-direction: column; height: auto; padding: 20px 0; gap: 20px; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 20px; }
+            .nav-actions { width: 100%; justify-content: center; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .socials { justify-content: center; }
+            .listing-grid { grid-template-columns: 1fr; }
+            .search-input { padding: 16px 16px 16px 48px; font-size: 14px; }
+            .search-btn { padding: 0 16px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                Index<span class="logo-dot">.</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">About Index</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-ghost btn-sm">Sign In</a>
+                <a href="#" class="btn btn-outline btn-sm">Add Business</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="geo-shape shape-circle"></div>
+        <div class="geo-shape shape-square"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1>Dominican Business Directory</h1>
+                <p>The official yellow pages. Find trusted professionals and services in Santo Domingo and beyond.</p>
+
+                <div class="search-wrapper">
+                    <form class="search-form" onsubmit="event.preventDefault()">
+                        <i data-lucide="search" size="24" class="search-icon"></i>
+                        <input type="text" class="search-input" placeholder="What are you looking for? (e.g. Plumber, Sushi...)">
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 48px;">
+                <h2 class="font-extra" style="font-size: 2rem; margin-bottom: 12px;">Browse by Sector</h2>
+                <p class="text-muted">Quick access to the most popular categories</p>
+            </div>
+
+            <div class="category-grid">
+                <div class="cat-card">
+                    <div class="cat-icon-wrapper"><i data-lucide="utensils"></i></div>
+                    <h3>Restaurants</h3>
+                    <span>2,300 Listings</span>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-wrapper"><i data-lucide="home"></i></div>
+                    <h3>Real Estate</h3>
+                    <span>876 Listings</span>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-wrapper"><i data-lucide="wrench"></i></div>
+                    <h3>Services</h3>
+                    <span>1,420 Listings</span>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-wrapper"><i data-lucide="car"></i></div>
+                    <h3>Automotive</h3>
+                    <span>540 Listings</span>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-wrapper"><i data-lucide="heart-pulse"></i></div>
+                    <h3>Health</h3>
+                    <span>980 Listings</span>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-wrapper"><i data-lucide="shopping-bag"></i></div>
+                    <h3>Retail</h3>
+                    <span>3,100 Listings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: var(--bg-subtle);">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 48px;">
+                <h2 class="font-extra" style="font-size: 2rem; margin-bottom: 12px;">Top Rated in Santo Domingo</h2>
+                <p class="text-muted">Verified partners with excellent community ratings</p>
+            </div>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Restaurant" class="listing-img">
+                    <div class="listing-body">
+                        <div class="listing-header">
+                            <h3 class="listing-title">Blue Mountain Cafe</h3>
+                            <div class="rating-badge">
+                                <i data-lucide="star" size="14"></i> 4.8
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Cafe</span>
+                            <span class="tag">Breakfast</span>
+                        </div>
+                        <div class="listing-meta">
+                            <div class="listing-meta-item">
+                                <i data-lucide="map-pin" size="16"></i>
+                                <span>Calle Paseo de los Locutores, Piantini</span>
+                            </div>
+                            <div class="listing-meta-item">
+                                <i data-lucide="clock" size="16"></i>
+                                <span style="color: var(--secondary); font-weight: 600;">Open until 10:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="listing-footer">
+                            <a href="#" class="link-action">View Profile <i data-lucide="arrow-right" size="16"></i></a>
+                            <span class="text-muted">$$$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7b66fc697330?auto=format&fit=crop&w=600&q=80" alt="Tech" class="listing-img">
+                    <div class="listing-body">
+                        <div class="listing-header">
+                            <h3 class="listing-title">Santo Domingo Tech</h3>
+                            <div class="rating-badge">
+                                <i data-lucide="star" size="14"></i> 4.9
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">IT Support</span>
+                            <span class="tag">B2B</span>
+                        </div>
+                        <div class="listing-meta">
+                            <div class="listing-meta-item">
+                                <i data-lucide="map-pin" size="16"></i>
+                                <span>Av. Winston Churchill, Ensanche Paraíso</span>
+                            </div>
+                            <div class="listing-meta-item">
+                                <i data-lucide="clock" size="16"></i>
+                                <span>Closes at 6:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="listing-footer">
+                            <a href="#" class="link-action">View Profile <i data-lucide="arrow-right" size="16"></i></a>
+                            <span class="text-muted">Contact for Quote</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c853d54?auto=format&fit=crop&w=600&q=80" alt="Auto" class="listing-img">
+                    <div class="listing-body">
+                        <div class="listing-header">
+                            <h3 class="listing-title">Taller Mecánico Express</h3>
+                            <div class="rating-badge">
+                                <i data-lucide="star" size="14"></i> 4.5
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Auto Repair</span>
+                            <span class="tag">Maintenance</span>
+                        </div>
+                        <div class="listing-meta">
+                            <div class="listing-meta-item">
+                                <i data-lucide="map-pin" size="16"></i>
+                                <span>Av. John F. Kennedy, Industrial Zone</span>
+                            </div>
+                            <div class="listing-meta-item">
+                                <i data-lucide="clock" size="16"></i>
+                                <span>Closes at 7:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="listing-footer">
+                            <a href="#" class="link-action">View Profile <i data-lucide="arrow-right" size="16"></i></a>
+                            <span class="text-muted">$$</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section">
+        <div class="container cta-content">
+            <h2 class="font-extra">Is your business listed?</h2>
+            <p>Join over 10,000 Dominican businesses increasing their visibility with Index. Create your free profile today.</p>
+            <a href="#" class="btn btn-white">List Your Business Free</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Index<span class="logo-dot">.</span></h3>
+                    <p style="opacity: 0.8; max-width: 300px;">The official business directory of the Dominican Republic. Connecting customers with trusted local services since 2023.</p>
+                    <div class="socials">
+                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Discover</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="#">Health & Medicine</a></li>
+                        <li><a href="#">Home Services</a></li>
+                        <li><a href="#">Legal Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">For Business</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Claim your Business</a></li>
+                        <li><a href="#">Advertising</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Santo Domingo, DN</a></li>
+                        <li><a href="#">hello@index.do</a></li>
+                        <li><a href="#">(809) 555-0123</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Index Directory. Made for the Dominican Republic.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

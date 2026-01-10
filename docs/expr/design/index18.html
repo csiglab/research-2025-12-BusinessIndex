@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice RD | Directorio Nacional de Negocios</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Organic Design System Colors */
+            --color-background: #FDFCF8;
+            --color-foreground: #2C2C24;
+            --color-primary: #5D7052;
+            --color-primary-foreground: #F3F4F1;
+            --color-secondary: #C18C5D;
+            --color-secondary-foreground: #FFFFFF;
+            --color-accent: #E6DCCD;
+            --color-accent-foreground: #4A4A40;
+            --color-muted: #F0EBE5;
+            --color-muted-foreground: #78786C;
+            --color-border: #DED8CF;
+            
+            /* Organic Shapes */
+            --radius-soft: 1.5rem;
+            --radius-pill: 9999px;
+            --radius-blob-1: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            
+            /* Shadows */
+            --shadow-soft: 0 4px 20px -2px rgba(93, 112, 82, 0.15);
+            --shadow-float: 0 10px 40px -10px rgba(193, 140, 93, 0.2);
+            --shadow-hover: 0 20px 40px -10px rgba(93, 112, 82, 0.15);
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--color-foreground);
+            background-color: var(--color-background);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Global Grain Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: multiply;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-foreground);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.025em; }
+        h2 { font-size: clamp(2rem, 4vw, 2.5rem); letter-spacing: -0.02em; margin-bottom: var(--space-md); }
+        h3 { font-size: 1.5rem; }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            margin: 1rem auto;
+            max-width: 1280px;
+            padding: 0 var(--space-lg);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(222, 216, 207, 0.5);
+            border-radius: var(--radius-pill);
+            padding: var(--space-sm) var(--space-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--color-foreground);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-foreground);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .btn-cta {
+            color: var(--color-primary) !important;
+            border: 2px solid var(--color-primary);
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-pill);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            background: var(--color-primary);
+            color: var(--color-primary-foreground) !important;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-foreground);
+        }
+
+        /* Mobile Menu Checkbox Logic */
+        #menu-toggle { display: none; }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 80px 0 60px;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' opacity='0.1'%3E%3Cpath fill='white' d='M500,250c138.07,0,250,111.93,250,250S638.07,750,500,750S250,638.07,250,500S361.93,250,500,250z M500,200c-165.69,0-300,134.31-300,300s134.31,300,300,300s300-134.31,300-300S665.69,200,500,200L500,200z'/%3E%3C/svg%3E");
+            background-size: 400px;
+            opacity: 0.1;
+        }
+
+        .hero h1 span {
+            color: var(--color-secondary); /* Changed to secondary for visibility */
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Search Components --- */
+        .hero-search-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-bar {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-pill);
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(93, 112, 82, 0.1);
+        }
+
+        .search-icon {
+            padding: 0 var(--space-md);
+            color: var(--color-muted-foreground);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: var(--space-sm) 0;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-foreground);
+            outline: none;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .search-btn {
+            padding: 0.75rem 2rem;
+            background: var(--color-primary);
+            color: var(--color-primary-foreground);
+            border: none;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .search-btn:hover {
+            background-color: var(--color-secondary);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-float);
+        }
+
+        /* --- Main Layout --- */
+        .main-layout {
+            min-height: calc(100vh - 200px);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--space-xl);
+            padding: var(--space-xl) 0;
+        }
+
+        .sidebar-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-soft);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            border: 2px solid rgba(222, 216, 207, 0.5);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .section-title i { color: var(--color-primary); }
+
+        /* Filters */
+        .filter-group { margin-bottom: var(--space-lg); }
+        .filter-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-muted-foreground);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+        }
+        
+        .filter-option {
+            display: flex; align-items: center; gap: var(--space-sm);
+            padding: var(--space-sm);
+            border-radius: var(--radius-soft);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none; /* for links */
+            color: var(--color-foreground);
+        }
+        
+        .filter-option:hover { background: var(--color-muted); }
+        .filter-option.active { background: var(--color-accent); font-weight: 500; }
+        
+        .filter-checkbox {
+            width: 20px; height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        .filter-option.active .filter-checkbox {
+            background: var(--color-primary); border-color: var(--color-primary);
+        }
+        .filter-option.active .filter-checkbox i {
+            color: var(--color-primary-foreground); font-size: 0.75rem;
+        }
+
+        /* Price Filter */
+        .price-filter { display: flex; gap: var(--space-xs); }
+        .price-level {
+            flex: 1; text-align: center; padding: var(--space-sm);
+            background: var(--color-muted); border-radius: var(--radius-soft);
+            font-size: 0.875rem; font-weight: 500; cursor: pointer;
+            border: 2px solid transparent; transition: all 0.3s ease;
+        }
+        .price-level.active {
+            background: var(--color-primary);
+            color: var(--color-primary-foreground);
+            border-color: var(--color-primary);
+        }
+
+        /* Business Grid */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .business-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            border: 2px solid rgba(222, 216, 207, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: var(--shadow-soft);
+            display: flex; flex-direction: column;
+        }
+
+        .business-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-primary);
+        }
+
+        .business-card.featured::before {
+            content: "Destacado";
+            position: absolute; top: var(--space-md); left: var(--space-md);
+            background: linear-gradient(135deg, var(--color-primary), #4a5a42);
+            color: var(--color-primary-foreground);
+            padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+            font-size: 0.75rem; font-weight: 600; z-index: 2;
+        }
+
+        .business-image {
+            width: 100%; height: 200px; object-fit: cover;
+        }
+
+        .business-content {
+            padding: var(--space-lg); flex: 1; display: flex; flex-direction: column;
+        }
+
+        .business-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .business-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem;}
+        .business-category { color: var(--color-primary); font-size: 0.875rem; font-weight: 500; }
+        .business-rating {
+            display: flex; align-items: center; gap: 0.25rem;
+            background: var(--color-muted); padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-pill); font-size: 0.875rem; font-weight: 600;
+        }
+        .business-rating i, .stars { color: #C18C5D; }
+
+        .business-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: var(--space-md) 0; }
+        .tag {
+            padding: 0.5rem 0.75rem; background: var(--color-muted);
+            border-radius: var(--radius-pill); font-size: 0.75rem;
+            font-weight: 500; color: var(--color-muted-foreground);
+            display: flex; align-items: center; gap: 0.25rem;
+        }
+        .tag.highlight { background: var(--color-accent); color: var(--color-accent-foreground); }
+
+        .business-details {
+            display: flex; align-items: center; justify-content: space-between;
+            padding-top: var(--space-md); border-top: 2px solid var(--color-border);
+            font-size: 0.875rem; margin-top: auto;
+        }
+        .status-open { color: var(--color-primary); font-weight: 600; }
+        .status-closing { color: var(--color-secondary); font-weight: 600; }
+
+        /* Categories */
+        .featured-categories {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg); margin: var(--space-2xl) 0;
+        }
+        .category-card {
+            background: rgba(255, 255, 255, 0.9); border-radius: var(--radius-soft);
+            padding: var(--space-xl); text-align: center;
+            border: 2px solid rgba(222, 216, 207, 0.5);
+            transition: all 0.3s ease; text-decoration: none; color: inherit;
+        }
+        .category-card:hover { transform: translateY(-4px); border-color: var(--color-primary); }
+        .category-icon {
+            width: 80px; height: 80px; margin: 0 auto var(--space-md);
+            background: var(--color-accent); border-radius: var(--radius-blob-1);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-primary); font-size: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.9); border-top: 2px solid var(--color-border);
+            padding: var(--space-2xl) 0 var(--space-xl); margin-top: var(--space-2xl);
+            position: relative;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl); margin-bottom: var(--space-xl);
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: var(--space-sm); }
+        .footer-links a {
+            color: var(--color-muted-foreground); text-decoration: none;
+            font-size: 0.875rem; transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--color-primary); }
+        .footer-bottom {
+            padding-top: var(--space-xl); border-top: 2px solid var(--color-border);
+            text-align: center; color: var(--color-muted-foreground); font-size: 0.875rem;
+        }
+
+        /* Background Blobs */
+        .blob-bg {
+            position: absolute; border-radius: var(--radius-blob-1);
+            opacity: 0.1; filter: blur(40px); z-index: 0; pointer-events: none;
+        }
+        .blob-1 { width: 500px; height: 500px; background: var(--color-primary); top: -250px; right: -250px; }
+        .blob-2 { width: 400px; height: 400px; background: var(--color-secondary); bottom: -200px; left: -200px; }
+
+        /* Utilities */
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+        }
+        .skip-link {
+            position: absolute; top: -40px; left: 0;
+            background: var(--color-primary); color: var(--color-primary-foreground);
+            padding: var(--space-sm) var(--space-md); text-decoration: none;
+            border-radius: 0 0 var(--radius-soft) 0; z-index: 1000;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 0 var(--space-md); }
+            .hamburger { display: block; }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: white;
+                flex-direction: column;
+                padding: var(--space-lg);
+                border: 2px solid var(--color-border);
+                border-radius: var(--radius-soft);
+                margin-top: 10px;
+                display: none; /* Hidden by default on mobile */
+                box-shadow: var(--shadow-float);
+            }
+
+            /* Show menu when checkbox is checked */
+            #menu-toggle:checked ~ .header .nav-links {
+                display: flex;
+            }
+
+            .hero { padding: var(--space-xl) 0; }
+            .featured-categories { grid-template-columns: repeat(2, 1fr); }
+            .business-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
+    <div class="blob-bg blob-1"></div>
+    <div class="blob-bg blob-2"></div>
+    
+    <input type="checkbox" id="menu-toggle">
+    
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <span style="color: var(--color-primary);"><i class="fas fa-leaf"></i></span> Índice RD.
+            </a>
+            
+            <div class="nav-links">
+                <a href="#">Explorar</a>
+                <a href="#">Categorías</a>
+                <a href="#">Nosotros</a>
+                <a href="#" class="btn-cta">Agregar Negocio</a>
+            </div>
+
+            <label for="menu-toggle" class="hamburger">
+                <i class="fas fa-bars"></i>
+            </label>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Tesoros locales en <br><span>República Dominicana.</span></h1>
+            <p>Desde la Zona Colonial hasta Punta Cana. Descubre negocios arraigados en calidad y tradición.</p>
+            
+            <div class="hero-search-wrapper">
+                <form class="search-bar" action="#" method="get">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Prueba 'Mangú', 'Dentista' o 'Santo Domingo'...">
+                    <button type="submit" class="search-btn">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="container main-layout">
+        <aside class="sidebar" aria-label="Filtros de búsqueda">
+            <div class="sidebar-section">
+                <h3 class="section-title"><i class="fas fa-filter" aria-hidden="true"></i> Filtros</h3>
+                
+                <div class="filter-group">
+                    <div class="filter-title">Categoría</div>
+                    <div class="filter-options">
+                        <label class="filter-option active" tabindex="0">
+                            <span class="filter-checkbox"><i class="fas fa-check" aria-hidden="true"></i></span>
+                            <span>Restaurantes</span>
+                            <input type="checkbox" name="category" value="restaurants" checked class="sr-only">
+                        </label>
+                        <label class="filter-option" tabindex="0">
+                            <span class="filter-checkbox"></span>
+                            <span>Cafeterías</span>
+                            <input type="checkbox" name="category" value="cafes" class="sr-only">
+                        </label>
+                        <label class="filter-option" tabindex="0">
+                            <span class="filter-checkbox"></span>
+                            <span>Tiendas</span>
+                            <input type="checkbox" name="category" value="retail" class="sr-only">
+                        </label>
+                        <label class="filter-option" tabindex="0">
+                            <span class="filter-checkbox"></span>
+                            <span>Servicios</span>
+                            <input type="checkbox" name="category" value="services" class="sr-only">
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <div class="filter-title">Rango de Precio</div>
+                    <div class="price-filter">
+                        <label class="price-level" tabindex="0">
+                            RD$ 100+
+                            <input type="radio" name="price" value="1" class="sr-only">
+                        </label>
+                        <label class="price-level active" tabindex="0">
+                            RD$ 500+
+                            <input type="radio" name="price" value="2" checked class="sr-only">
+                        </label>
+                        <label class="price-level" tabindex="0">
+                            RD$ 1500+
+                            <input type="radio" name="price" value="3" class="sr-only">
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <div class="filter-title">Calificación</div>
+                    <div class="filter-options">
+                        <label class="filter-option" tabindex="0">
+                            <span class="filter-checkbox"></span>
+                            <div style="display: flex; gap: 5px; align-items: center;">
+                                <span class="stars" aria-label="5 estrellas">★★★★★</span>
+                                <span>4.5+</span>
+                            </div>
+                            <input type="checkbox" name="rating" value="4.5" class="sr-only">
+                        </label>
+                        <label class="filter-option active" tabindex="0">
+                            <span class="filter-checkbox"><i class="fas fa-check" aria-hidden="true"></i></span>
+                            <div style="display: flex; gap: 5px; align-items: center;">
+                                <span class="stars" aria-label="4 estrellas">★★★★☆</span>
+                                <span>4.0+</span>
+                            </div>
+                            <input type="checkbox" name="rating" value="4.0" checked class="sr-only">
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="search-btn" style="width: 100%; margin-top: var(--space-md);">
+                    Aplicar Filtros
+                </button>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="section-title"><i class="fas fa-fire" aria-hidden="true"></i> Popular</h3>
+                <nav aria-label="Búsquedas populares">
+                    <div class="filter-options">
+                        <a href="#italian" class="filter-option">
+                            <i class="fas fa-search" style="color: var(--color-muted-foreground);"></i>
+                            <span>Restaurantes Italianos</span>
+                        </a>
+                        <a href="#salons" class="filter-option">
+                            <i class="fas fa-search" style="color: var(--color-muted-foreground);"></i>
+                            <span>Salones de Belleza</span>
+                        </a>
+                        <a href="#yoga" class="filter-option">
+                            <i class="fas fa-search" style="color: var(--color-muted-foreground);"></i>
+                            <span>Estudios de Yoga</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+        
+        <div class="content-area">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+                <div>
+                    <h2>Restaurantes Destacados</h2>
+                    <div style="color: var(--color-muted-foreground);">Mostrando <strong>24</strong> resultados en Santo Domingo</div>
+                </div>
+            </div>
+            
+            <section class="featured-categories" aria-label="Categorías destacadas">
+                <a href="#fine-dining" class="category-card">
+                    <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Alta Cocina</h3>
+                    <p>Restaurantes elegantes</p>
+                </a>
+                <a href="#cafes" class="category-card">
+                    <div class="category-icon"><i class="fas fa-coffee"></i></div>
+                    <h3>Cafeterías</h3>
+                    <p>Lugares acogedores</p>
+                </a>
+                <a href="#boutiques" class="category-card">
+                    <div class="category-icon"><i class="fas fa-store"></i></div>
+                    <h3>Boutiques</h3>
+                    <p>Tiendas locales</p>
+                </a>
+                <a href="#wellness" class="category-card">
+                    <div class="category-icon"><i class="fas fa-spa"></i></div>
+                    <h3>Bienestar</h3>
+                    <p>Spas y salones</p>
+                </a>
+            </section>
+            
+            <section class="business-grid" aria-label="Lista de negocios">
+                <article class="business-card featured">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bistro Elegante" class="business-image">
+                    <div class="business-content">
+                        <div class="business-header">
+                            <div>
+                                <h3 class="business-name">Bistro Elegante</h3>
+                                <div class="business-category"><i class="fas fa-utensils"></i> Cocina Francesa</div>
+                            </div>
+                            <div class="business-rating"><i class="fas fa-star"></i> 4.8</div>
+                        </div>
+                        <div class="business-tags">
+                            <span class="tag highlight"><i class="fas fa-award"></i> Recomendado</span>
+                            <span class="tag"><i class="fas fa-wine-glass-alt"></i> Vinos</span>
+                        </div>
+                        <div class="business-details">
+                            <span><i class="fas fa-map-marker-alt"></i> 500m</span>
+                            <span><i class="fas fa-dollar-sign"></i> $$$</span>
+                            <span class="status-open">Abierto</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="business-card">
+                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artisan Roasters" class="business-image">
+                    <div class="business-content">
+                        <div class="business-header">
+                            <div>
+                                <h3 class="business-name">Artisan Roasters</h3>
+                                <div class="business-category"><i class="fas fa-coffee"></i> Café Especial</div>
+                            </div>
+                            <div class="business-rating"><i class="fas fa-star"></i> 4.6</div>
+                        </div>
+                        <div class="business-tags">
+                            <span class="tag highlight"><i class="fas fa-leaf"></i> Orgánico</span>
+                            <span class="tag"><i class="fas fa-wifi"></i> WiFi</span>
+                        </div>
+                        <div class="business-details">
+                            <span><i class="fas fa-map-marker-alt"></i> 800m</span>
+                            <span><i class="fas fa-dollar-sign"></i> $$</span>
+                            <span class="status-open">Abierto</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="business-card">
+                    <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sakura Sushi" class="business-image">
+                    <div class="business-content">
+                        <div class="business-header">
+                            <div>
+                                <h3 class="business-name">Sakura Sushi</h3>
+                                <div class="business-category"><i class="fas fa-fish"></i> Japonés</div>
+                            </div>
+                            <div class="business-rating"><i class="fas fa-star"></i> 4.9</div>
+                        </div>
+                        <div class="business-tags">
+                            <span class="tag highlight"><i class="fas fa-star"></i> Chef Choice</span>
+                            <span class="tag"><i class="fas fa-truck"></i> Delivery</span>
+                        </div>
+                        <div class="business-details">
+                            <span><i class="fas fa-map-marker-alt"></i> 1.2km</span>
+                            <span><i class="fas fa-dollar-sign"></i> $$$$</span>
+                            <span class="status-closing">Cierra pronto</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="business-card">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Velvet Bar" class="business-image">
+                    <div class="business-content">
+                        <div class="business-header">
+                            <div>
+                                <h3 class="business-name">The Velvet Bar</h3>
+                                <div class="business-category"><i class="fas fa-cocktail"></i> Coctelería</div>
+                            </div>
+                            <div class="business-rating"><i class="fas fa-star"></i> 4.7</div>
+                        </div>
+                        <div class="business-tags">
+                            <span class="tag highlight"><i class="fas fa-music"></i> Jazz en Vivo</span>
+                            <span class="tag"><i class="fas fa-couch"></i> Lounge</span>
+                        </div>
+                        <div class="business-details">
+                            <span><i class="fas fa-map-marker-alt"></i> 1km</span>
+                            <span><i class="fas fa-dollar-sign"></i> $$$</span>
+                            <span class="status-open">Abierto</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Índice RD</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">Sobre Nosotros</a></li>
+                        <li><a href="#careers">Carreras</a></li>
+                        <li><a href="#press">Prensa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Para Empresas</h4>
+                    <ul class="footer-links">
+                        <li><a href="#claim">Reclamar Listado</a></li>
+                        <li><a href="#business">Centro de Negocios</a></li>
+                        <li><a href="#advertising">Publicidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul class="footer-links">
+                        <li><a href="#help">Centro de Ayuda</a></li>
+                        <li><a href="#contact">Contactarnos</a></li>
+                        <li><a href="#privacy">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Conectar</h4>
+                    <ul class="footer-links">
+                        <li><a href="#twitter"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#facebook"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#instagram"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Índice RD. Todos los derechos reservados. Directorio nacional de negocios dominicanos.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalFinder - Discover Businesses Near You</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --secondary: #4caf50;
+            --accent: #ff4081;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-right: 10px;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 80px 0;
+            border-radius: 0 0 30px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .search-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 5px;
+            display: flex;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            outline: none;
+            border-radius: var(--radius);
+        }
+        
+        .location-input {
+            border-left: 1px solid #eee;
+            border-radius: 0;
+        }
+        
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .category-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .category-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .category-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Businesses Section */
+        .businesses {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .business-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .business-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .business-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .business-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .business-info {
+            padding: 20px;
+        }
+        
+        .business-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .business-category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .business-category i {
+            margin-right: 5px;
+        }
+        
+        .business-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .business-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .business-rating i {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+        
+        .business-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+        }
+        
+        /* Business Owners Section */
+        .business-owners {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+        }
+        
+        .owners-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .owners-text {
+            flex: 1;
+        }
+        
+        .owners-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .owners-text p {
+            margin-bottom: 30px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .benefits {
+            margin-bottom: 30px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-item i {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .owners-image {
+            flex: 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Popular Searches */
+        .popular-searches {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .tag {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .owners-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .location-input {
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+            
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>LocalFinder</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Near Me</a></li>
+                    <li><a href="#">Deals</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Discover Amazing Local Businesses</h1>
+            <p>Find the best restaurants, services, and shops near you with LocalFinder</p>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="What are you looking for?">
+                <input type="text" class="search-input location-input" placeholder="Location">
+                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Categories</h2>
+                <p>Explore our most popular business categories to find exactly what you need</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Restaurants</h3>
+                    <p>1,240+ places</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Electricians</h3>
+                    <p>450+ professionals</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Home Repair</h3>
+                    <p>680+ services</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-cut"></i>
+                    <h3>Salons & Spas</h3>
+                    <p>320+ venues</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Healthcare</h3>
+                    <p>510+ providers</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Automotive</h3>
+                    <p>390+ services</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Fitness</h3>
+                    <p>270+ centers</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Retail</h3>
+                    <p>890+ stores</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Businesses Section -->
+    <section class="businesses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Businesses Near You</h2>
+                <p>Discover top-rated businesses in your area</p>
+            </div>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3');">
+                        <span class="business-badge">Featured</span>
+                    </div>
+                    <div class="business-info">
+                        <h3 class="business-name">Headquarter AS</h3>
+                        <div class="business-category">
+                            <i class="fas fa-briefcase"></i> Business Services
+                        </div>
+                        <div class="business-details">
+                            <div class="business-rating">
+                                <i class="fas fa-star"></i> 4.8 (124)
+                            </div>
+                            <div class="business-distance">
+                                <i class="fas fa-map-marker-alt"></i> 0.8 mi
+                            </div>
+                        </div>
+                        <div class="business-actions">
+                            <button class="btn btn-primary btn-small">View Details</button>
+                            <button class="btn btn-outline btn-small"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3');">
+                    </div>
+                    <div class="business-info">
+                        <h3 class="business-name">Bella Vista Restaurant</h3>
+                        <div class="business-category">
+                            <i class="fas fa-utensils"></i> Italian Cuisine
+                        </div>
+                        <div class="business-details">
+                            <div class="business-rating">
+                                <i class="fas fa-star"></i> 4.6 (89)
+                            </div>
+                            <div class="business-distance">
+                                <i class="fas fa-map-marker-alt"></i> 1.2 mi
+                            </div>
+                        </div>
+                        <div class="business-actions">
+                            <button class="btn btn-primary btn-small">View Details</button>
+                            <button class="btn btn-outline btn-small"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1581091226835-a6a58d2b5a83?ixlib=rb-4.0.3');">
+                    </div>
+                    <div class="business-info">
+                        <h3 class="business-name">TechFix Solutions</h3>
+                        <div class="business-category">
+                            <i class="fas fa-laptop"></i> IT Services
+                        </div>
+                        <div class="business-details">
+                            <div class="business-rating">
+                                <i class="fas fa-star"></i> 4.9 (156)
+                            </div>
+                            <div class="business-distance">
+                                <i class="fas fa-map-marker-alt"></i> 0.5 mi
+                            </div>
+                        </div>
+                        <div class="business-actions">
+                            <button class="btn btn-primary btn-small">View Details</button>
+                            <button class="btn btn-outline btn-small"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Owners Section -->
+    <section class="business-owners">
+        <div class="container">
+            <div class="owners-content">
+                <div class="owners-text">
+                    <h2>Grow Your Business with LocalFinder</h2>
+                    <p>Join thousands of businesses that are already benefiting from our platform</p>
+                    <div class="benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Increased Visibility</h4>
+                                <p>Reach more customers in your area</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Customer Engagement</h4>
+                                <p>Connect with customers through reviews and messages</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Business Analytics</h4>
+                                <p>Track performance with detailed insights</p>
+                            </div>
+                        </div>
+                    </div> 
+                    <button class="btn btn-primary">List Your Business</button>
+                </div>
+                <div class="owners-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3');">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Searches -->
+    <section class="popular-searches">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Searches</h2>
+                <p>Explore what others are searching for in your area</p>
+            </div>
+            <div class="tags-container">
+                <div class="tag">Coffee Shops</div>
+                <div class="tag">Plumbers</div>
+                <div class="tag">Hair Salons</div>
+                <div class="tag">Pizza Delivery</div>
+                <div class="tag">Dentists</div>
+                <div class="tag">Gyms</div>
+                <div class="tag">Pet Grooming</div>
+                <div class="tag">Car Repair</div>
+                <div class="tag">Landscaping</div>
+                <div class="tag">Accountants</div>
+                <div class="tag">Hotels</div>
+                <div class="tag">Real Estate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>LocalFinder</h3>
+                    <p>Connecting you with the best local businesses since 2023.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>For Users</h3>
+                    <ul>
+                        <li><a href="#">Search Businesses</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Deals & Offers</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>For Businesses</h3>
+                    <ul>
+                        <li><a href="#">Add Your Business</a></li>
+                        <li><a href="#">Business Solutions</a></li>
+                        <li><a href="#">Advertising</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Business Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 LocalFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

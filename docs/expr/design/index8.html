@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es-DO">
+<head>
+  <meta charset="utf-8" />
+  <title>Index – El Directorio de Negocios de la República Dominicana</title>
+  <meta name="description" content="Encuentra empresas, servicios y profesionales en Santo Domingo, Santiago y todo el país. Rápido, fácil y confiable." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            // Material You (Purple Seed #6750A4)
+            md: {
+              primary: '#6750A4',
+              onPrimary: '#FFFFFF',
+              primaryContainer: '#EADDFF',
+              onPrimaryContainer: '#21005D',
+              secondary: '#625B71',
+              secondaryContainer: '#E8DEF8',
+              onSecondaryContainer: '#1D192B',
+              tertiary: '#7D5260',
+              surface: '#FFFBFE', // Warm off-white
+              onSurface: '#1C1B1F', // Warm black
+              surfaceVariant: '#E7E0EC',
+              onSurfaceVariant: '#49454F',
+              outline: '#79747E',
+              surfaceContainer: '#F3EDF7', // Main card bg
+              surfaceContainerLow: '#F7F2FA', // Input bg
+            }
+          },
+          boxShadow: {
+            'md-1': '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)', // Elevation 1
+            'md-2': '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)', // Elevation 2
+          },
+          borderRadius: {
+            'md-card': '24px',
+            'md-hero': '48px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* CSS Reset & Utilities */
+    body {
+      background-color: #FFFBFE; /* md-surface */
+      color: #1C1B1F; /* md-on-surface */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Material You State Layers (Pure CSS Ripples/Overlays) */
+    .state-layer {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    
+    .state-layer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: currentColor;
+      opacity: 0;
+      transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .state-layer:hover::after { opacity: 0.08; }
+    .state-layer:active::after { opacity: 0.12; }
+    .state-layer:active { transform: scale(0.98); transition: transform 0.1s; }
+
+    /* Material Design 3 Filled Input Styling */
+    .md-input-container {
+      position: relative;
+      background-color: #F7F2FA; /* surface-container-low */
+      border-radius: 12px 12px 0 0;
+      border-bottom: 1px solid #79747E; /* outline */
+      transition: border-color 0.2s;
+    }
+    .md-input-container:focus-within {
+      border-bottom: 2px solid #6750A4; /* primary */
+    }
+    
+    /* Organic Blur Shapes */
+    .organic-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.4;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <header class="sticky top-0 z-50 bg-[#FFFBFE]/90 backdrop-blur-md border-b border-black/5">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-lg bg-md-primary flex items-center justify-center text-white font-bold text-xl group-hover:bg-[#523A8C] transition-colors">I</div>
+        <span class="font-bold text-xl tracking-tight text-md-onSurface">index<span class="text-md-primary">.do</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-2">
+        <a href="#" class="px-5 py-2.5 rounded-full text-sm font-medium text-md-onSurfaceVariant hover:bg-md-onSurface/5 transition-colors">Categorías</a>
+        <a href="#" class="px-5 py-2.5 rounded-full text-sm font-medium text-md-onSurfaceVariant hover:bg-md-onSurface/5 transition-colors">Para Negocios</a>
+        <a href="#" class="ml-2 px-6 py-2.5 rounded-full bg-md-primary text-white text-sm font-medium shadow-md-1 hover:shadow-md-2 active:scale-95 transition-all">Ingresar</a>
+      </nav>
+
+      <button class="md:hidden p-2 rounded-full hover:bg-black/5 text-md-onSurfaceVariant">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <section class="relative pt-12 pb-16 px-6 overflow-hidden">
+      <div class="organic-blob bg-md-secondaryContainer w-96 h-96 top-0 left-[-100px]"></div>
+      <div class="organic-blob bg-md-primaryContainer w-80 h-80 bottom-0 right-[-50px]"></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8">
+        <span class="inline-block py-1 px-4 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer text-sm font-medium mb-2">
+          🇩🇴 La guía oficial de República Dominicana
+        </span>
+        
+        <h1 class="text-4xl md:text-6xl font-normal text-md-onSurface tracking-tight">
+          Encuentra lo que <span class="font-bold text-md-primary">necesitas.</span>
+        </h1>
+        
+        <div class="bg-white p-2 rounded-[28px] shadow-md-1 hover:shadow-md-2 transition-shadow duration-300 max-w-2xl mx-auto flex flex-col md:flex-row gap-2 border border-md-outline/20">
+          
+          <div class="flex-1 md:border-r border-gray-100 relative group">
+            <div class="absolute top-3 left-4 text-md-onSurfaceVariant/70 pointer-events-none">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-width="2" stroke-linecap="round" d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <input type="text" placeholder="¿Qué buscas? (ej. Restaurante, Plomero)" 
+                   class="w-full h-12 pl-12 pr-4 bg-transparent rounded-full outline-none text-md-onSurface placeholder:text-md-onSurfaceVariant/50 focus:bg-md-surfaceContainerLow transition-colors" />
+          </div>
+
+          <div class="flex-1 relative">
+             <div class="absolute top-3 left-4 text-md-onSurfaceVariant/70 pointer-events-none">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <input type="text" placeholder="Ubicación (ej. Santo Domingo)" 
+                   class="w-full h-12 pl-12 pr-4 bg-transparent rounded-full outline-none text-md-onSurface placeholder:text-md-onSurfaceVariant/50 focus:bg-md-surfaceContainerLow transition-colors" />
+          </div>
+
+          <button class="bg-md-primary text-white h-12 px-8 rounded-full font-medium hover:bg-[#523A8C] active:scale-95 transition-all">
+            Buscar
+          </button>
+        </div>
+
+        <p class="text-md-onSurfaceVariant text-sm">
+          Tendencias: <a href="#" class="hover:text-md-primary underline decoration-transparent hover:decoration-current transition-all">Farmacias 24h</a>, <a href="#" class="hover:text-md-primary underline decoration-transparent hover:decoration-current transition-all">Ferreterías</a>, <a href="#" class="hover:text-md-primary underline decoration-transparent hover:decoration-current transition-all">Salones</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-6 max-w-7xl mx-auto">
+      <h2 class="text-2xl font-normal text-md-onSurface mb-8">Categorías Populares</h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <a href="#" class="state-layer group flex flex-col items-center justify-center p-6 bg-md-surfaceContainer rounded-md-card hover:bg-md-surfaceContainerLow transition-colors text-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">🍔</div>
+          <span class="text-sm font-medium text-md-onSurface">Restaurantes</span>
+        </a>
+
+        <a href="#" class="state-layer group flex flex-col items-center justify-center p-6 bg-md-surfaceContainer rounded-md-card hover:bg-md-surfaceContainerLow transition-colors text-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">🚗</div>
+          <span class="text-sm font-medium text-md-onSurface">Automotriz</span>
+        </a>
+
+        <a href="#" class="state-layer group flex flex-col items-center justify-center p-6 bg-md-surfaceContainer rounded-md-card hover:bg-md-surfaceContainerLow transition-colors text-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">💊</div>
+          <span class="text-sm font-medium text-md-onSurface">Salud</span>
+        </a>
+
+        <a href="#" class="state-layer group flex flex-col items-center justify-center p-6 bg-md-surfaceContainer rounded-md-card hover:bg-md-surfaceContainerLow transition-colors text-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">🏠</div>
+          <span class="text-sm font-medium text-md-onSurface">Hogar</span>
+        </a>
+
+        <a href="#" class="state-layer group flex flex-col items-center justify-center p-6 bg-md-surfaceContainer rounded-md-card hover:bg-md-surfaceContainerLow transition-colors text-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">⚖️</div>
+          <span class="text-sm font-medium text-md-onSurface">Legal</span>
+        </a>
+
+        <a href="#" class="state-layer group flex flex-col items-center justify-center p-6 bg-md-surfaceContainer rounded-md-card hover:bg-md-surfaceContainerLow transition-colors text-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-md-secondaryContainer text-md-onSecondaryContainer flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">✈️</div>
+          <span class="text-sm font-medium text-md-onSurface">Turismo</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="py-8 px-6 bg-md-surfaceContainer/50 rounded-t-[48px]">
+      <div class="max-w-7xl mx-auto mt-8">
+        <div class="flex justify-between items-end mb-8">
+          <div>
+            <h2 class="text-2xl font-normal text-md-onSurface">Destacados en Santo Domingo</h2>
+            <p class="text-md-onSurfaceVariant mt-1">Negocios verificados cerca de ti</p>
+          </div>
+          <a href="#" class="hidden md:inline-flex items-center px-4 py-2 border border-md-outline rounded-full text-sm font-medium text-md-primary hover:bg-md-primary/5 transition-colors">Ver todos</a>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          
+          <article class="state-layer group bg-[#FFFBFE] rounded-md-card p-2 shadow-sm hover:shadow-md-1 transition-all duration-300 flex flex-col sm:flex-row gap-4">
+            <div class="w-full sm:w-40 h-40 rounded-[20px] overflow-hidden bg-gray-200 shrink-0">
+               <img src="https://source.unsplash.com/random/300x300?restaurant" alt="Restaurante Criollo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="flex flex-col justify-center p-2 pr-4 flex-grow">
+              <div class="flex justify-between items-start">
+                <h3 class="font-bold text-lg text-md-onSurface">El Mesón del Sabor</h3>
+                <span class="bg-md-tertiary/10 text-md-tertiary text-xs px-2 py-1 rounded-full font-medium">Abierto</span>
+              </div>
+              <p class="text-md-onSurfaceVariant text-sm mt-1">Comida Típica Dominicana • $$</p>
+              <div class="mt-2 text-sm text-md-onSurfaceVariant flex items-center gap-1">
+                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                 Piantini, Santo Domingo
+              </div>
+              <div class="mt-4 flex gap-2">
+                <button class="flex-1 py-2 rounded-full border border-md-outline/30 text-sm font-medium text-md-primary hover:bg-md-primary/5 transition-colors">Llamar</button>
+                <button class="px-4 py-2 rounded-full bg-md-primaryContainer text-md-onPrimaryContainer text-sm font-medium hover:brightness-95 transition-colors">Perfil</button>
+              </div>
+            </div>
+          </article>
+
+           <article class="state-layer group bg-[#FFFBFE] rounded-md-card p-2 shadow-sm hover:shadow-md-1 transition-all duration-300 flex flex-col sm:flex-row gap-4">
+            <div class="w-full sm:w-40 h-40 rounded-[20px] overflow-hidden bg-gray-200 shrink-0">
+               <img src="https://source.unsplash.com/random/300x300?lawyer" alt="Oficina Legal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="flex flex-col justify-center p-2 pr-4 flex-grow">
+              <div class="flex justify-between items-start">
+                <h3 class="font-bold text-lg text-md-onSurface">García & Asoc.</h3>
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">Verificado</span>
+              </div>
+              <p class="text-md-onSurfaceVariant text-sm mt-1">Servicios Legales y Corporativos</p>
+              <div class="mt-2 text-sm text-md-onSurfaceVariant flex items-center gap-1">
+                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                 Los Jardines, Santiago
+              </div>
+              <div class="mt-4 flex gap-2">
+                <button class="flex-1 py-2 rounded-full border border-md-outline/30 text-sm font-medium text-md-primary hover:bg-md-primary/5 transition-colors">Llamar</button>
+                <button class="px-4 py-2 rounded-full bg-md-primaryContainer text-md-onPrimaryContainer text-sm font-medium hover:brightness-95 transition-colors">Perfil</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+        
+        <div class="mt-8 text-center md:hidden">
+           <a href="#" class="inline-flex items-center px-6 py-3 border border-md-outline rounded-full text-sm font-medium text-md-primary hover:bg-md-primary/5 transition-colors">Ver todos los negocios</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+        <div class="flex-1 space-y-6">
+          <h2 class="text-3xl font-normal text-md-onSurface">Conecta con los mejores negocios del país</h2>
+          <p class="text-md-onSurfaceVariant leading-relaxed text-lg">
+            Index es la plataforma digital más rápida de la República Dominicana. Sin anuncios molestos, sin esperas. Conectamos a clientes con profesionales locales, desde Punta Cana hasta Montecristi.
+          </p>
+          <ul class="space-y-3 mt-4">
+            <li class="flex items-center gap-3 text-md-onSurface">
+              <span class="w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs">✓</span>
+              Datos actualizados diariamente
+            </li>
+            <li class="flex items-center gap-3 text-md-onSurface">
+              <span class="w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs">✓</span>
+              Soporte 100% local
+            </li>
+            <li class="flex items-center gap-3 text-md-onSurface">
+              <span class="w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs">✓</span>
+              Optimizado para móviles
+            </li>
+          </ul>
+        </div>
+        <div class="flex-1 relative">
+           <div class="organic-blob bg-md-tertiary w-64 h-64 top-10 right-10 opacity-30 blur-2xl"></div>
+           <div class="relative bg-md-surfaceContainer p-8 rounded-[32px] shadow-lg">
+              <h3 class="font-bold text-lg mb-4">¿Tienes un negocio?</h3>
+              <p class="text-md-onSurfaceVariant mb-6">Regístrate gratis y llega a miles de clientes potenciales hoy mismo.</p>
+              <button class="w-full py-3 rounded-full bg-md-onSurface text-md-surface font-medium hover:opacity-90 transition-opacity">Crear Perfil de Empresa</button>
+           </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-md-surfaceContainerLow border-t border-black/5 py-12 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div class="space-y-4">
+        <span class="font-bold text-lg text-md-onSurface">index.do</span>
+        <p class="text-sm text-md-onSurfaceVariant">El directorio comercial moderno de la República Dominicana.</p>
+      </div>
+      
+      <div>
+        <h4 class="font-bold text-sm mb-4 text-md-onSurface">Explorar</h4>
+        <ul class="space-y-2 text-sm text-md-onSurfaceVariant">
+          <li><a href="#" class="hover:text-md-primary">Restaurantes</a></li>
+          <li><a href="#" class="hover:text-md-primary">Servicios Médicos</a></li>
+          <li><a href="#" class="hover:text-md-primary">Construcción</a></li>
+          <li><a href="#" class="hover:text-md-primary">Turismo</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-sm mb-4 text-md-onSurface">Empresas</h4>
+        <ul class="space-y-2 text-sm text-md-onSurfaceVariant">
+          <li><a href="#" class="hover:text-md-primary">Publicar negocio</a></li>
+          <li><a href="#" class="hover:text-md-primary">Planes y Precios</a></li>
+          <li><a href="#" class="hover:text-md-primary">Éxito de clientes</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-sm mb-4 text-md-onSurface">Legal</h4>
+        <ul class="space-y-2 text-sm text-md-onSurfaceVariant">
+          <li><a href="#" class="hover:text-md-primary">Privacidad</a></li>
+          <li><a href="#" class="hover:text-md-primary">Términos</a></li>
+          <li><a href="#" class="hover:text-md-primary">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center text-xs text-md-onSurfaceVariant/70">
+      <p>© 2025 Index DO. Todos los derechos reservados.</p>
+      <p>Hecho con ♥ en Santo Domingo.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

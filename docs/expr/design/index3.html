@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index | Dominican Republic Business Directory</title>
+    <meta name="description" content="Dominican Republic's official business directory. Find local companies, services, and professionals across all industries.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Nordic Design System - WCAG 2.2 AA Compliant */
+        :root {
+            /* Nordic Color Palette */
+            --nordic-white: #ffffff;
+            --nordic-snow: #f8fafc;
+            --nordic-frost: #e8edf3;
+            --nordic-steel: #475569;
+            --nordic-midnight: #1e293b;
+            --nordic-blue: #3b82f6;
+            --nordic-azure: #2563eb;
+            --nordic-pine: #10b981;
+            --nordic-fjord: #0ea5e9;
+            --nordic-sunset: #f97316;
+            
+            /* Semantic Variables */
+            --background: var(--nordic-snow);
+            --surface: var(--nordic-white);
+            --text-primary: var(--nordic-midnight);
+            --text-secondary: var(--nordic-steel);
+            --accent: var(--nordic-blue);
+            --accent-hover: var(--nordic-azure);
+            --success: var(--nordic-pine);
+            --border: #e2e8f0;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Noto Serif', Georgia, serif;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 2rem;
+            --text-4xl: 2.5rem;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            background-color: var(--background);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* WCAG 2.2 AA Compliance */
+        :focus {
+            outline: 3px solid var(--nordic-blue);
+            outline-offset: 2px;
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Skip to Main Content Link */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: var(--space-sm);
+            z-index: 1001;
+            text-decoration: none;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) 0;
+            gap: var(--space-lg);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--nordic-blue), var(--nordic-fjord));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--nordic-white);
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: var(--text-base);
+            font-weight: normal;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Search Bar - Dominant Feature */
+        .search-section {
+            background: linear-gradient(135deg, var(--nordic-frost), var(--nordic-white));
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-title {
+            font-family: var(--font-serif);
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .search-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            font-size: var(--text-lg);
+        }
+
+        .search-form {
+            position: relative;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: var(--space-lg) var(--space-lg) var(--space-lg) 3.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: var(--text-lg);
+            background-color: var(--surface);
+            transition: var(--transition-base);
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--space-lg);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+        }
+
+        .search-button {
+            padding: 0 var(--space-xl);
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .search-button:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Quick Categories */
+        .quick-categories {
+            padding: var(--space-lg) 0;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: var(--space-sm);
+        }
+
+        .category-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-md);
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition-base);
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .category-icon {
+            width: 56px;
+            height: 56px;
+            background-color: var(--nordic-frost);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-sm);
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .category-name {
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+
+        .category-count {
+            font-size: var(--text-base);
+            color: var(--text-secondary);
+        }
+
+        /* Featured Businesses */
+        .featured-section {
+            padding: var(--space-xl) 0;
+            background-color: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .view-all-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-base);
+        }
+
+        .view-all-link:hover {
+            gap: var(--space-sm);
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .business-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition-base);
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .business-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .business-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--nordic-frost);
+            color: var(--text-secondary);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+
+        .business-name {
+            font-family: var(--font-serif);
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+
+        .business-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .business-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            line-height: 1.6;
+        }
+
+        .business-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .business-tag {
+            padding: 4px 10px;
+            background-color: var(--nordic-frost);
+            color: var(--text-secondary);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .card-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid var(--border);
+            background-color: var(--nordic-snow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .business-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--nordic-sunset);
+            font-weight: 600;
+        }
+
+        .contact-button {
+            padding: 8px 20px;
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-button:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: var(--space-xl) 0;
+            background: linear-gradient(135deg, var(--nordic-frost), var(--surface));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: var(--text-4xl);
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: var(--text-base);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--nordic-midnight);
+            color: var(--nordic-white);
+            padding: var(--space-2xl) 0 var(--space-xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-column h3 {
+            font-family: var(--font-serif);
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-md);
+            color: var(--nordic-white);
+        }
+
+        .footer-column p {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition-base);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--nordic-white);
+            padding-left: 4px;
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: #cbd5e1;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-md);
+            }
+
+            .search-input-wrapper {
+                flex-direction: column;
+            }
+
+            .search-button {
+                padding: var(--space-md);
+                margin-top: var(--space-sm);
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+
+            .text-3xl {
+                font-size: var(--text-2xl);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-text {
+                font-size: var(--text-xl);
+            }
+
+            .search-input {
+                padding: var(--space-md) var(--space-md) var(--space-md) 3rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .search-button,
+            .contact-button,
+            .view-all-link {
+                display: none;
+            }
+
+            .business-card {
+                break-inside: avoid;
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to Main Content for Accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="main-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" aria-label="Index - Home">
+                    <div class="logo-icon" aria-hidden="true">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="logo-text">
+                        Index
+                        <span class="logo-subtitle">Dominican Business Directory</span>
+                    </div>
+                </a>
+                <nav aria-label="Main navigation">
+                    <ul style="display: flex; gap: var(--space-lg); list-style: none;">
+                        <li><a href="#" style="text-decoration: none; color: var(--text-primary); font-weight: 500;">Home</a></li>
+                        <li><a href="#categories" style="text-decoration: none; color: var(--text-primary); font-weight: 500;">Categories</a></li>
+                        <li><a href="#featured" style="text-decoration: none; color: var(--text-primary); font-weight: 500;">Businesses</a></li>
+                        <li><a href="#contact" style="text-decoration: none; color: var(--text-primary); font-weight: 500;">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Hero Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <h1 class="search-title">Find Dominican Businesses & Services</h1>
+                    <p class="search-subtitle">Search through 50,000+ verified businesses across the Dominican Republic</p>
+                    <form class="search-form" action="#" method="get" role="search">
+                        <div class="search-input-wrapper">
+                            <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                            <input 
+                                type="search" 
+                                class="search-input" 
+                                placeholder="Search for restaurants, plumbers, dentists, services..." 
+                                aria-label="Search businesses"
+                                required
+                            >
+                            <button type="submit" class="search-button">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Categories -->
+        <section class="quick-categories" id="categories">
+            <div class="container">
+                <h2 class="section-title">Popular Categories</h2>
+                <div class="categories-grid">
+                    <!-- Category 1 -->
+                    <a href="#" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="category-name">Restaurants</h3>
+                        <span class="category-count">2,847 listings</span>
+                    </a>
+
+                    <!-- Category 2 -->
+                    <a href="#" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3 class="category-name">Plumbers</h3>
+                        <span class="category-count">1,234 listings</span>
+                    </a>
+
+                    <!-- Category 3 -->
+                    <a href="#" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3 class="category-name">Dentists</h3>
+                        <span class="category-count">856 listings</span>
+                    </a>
+
+                    <!-- Category 4 -->
+                    <a href="#" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="category-name">Hotels</h3>
+                        <span class="category-count">3,245 listings</span>
+                    </a>
+
+                    <!-- Category 5 -->
+                    <a href="#" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="category-name">Auto Repair</h3>
+                        <span class="category-count">945 listings</span>
+                    </a>
+
+                    <!-- Category 6 -->
+                    <a href="#" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="category-name">Schools</h3>
+                        <span class="category-count">1,567 listings</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Businesses -->
+        <section class="featured-section" id="featured">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Dominican Businesses</h2>
+                    <a href="#" class="view-all-link">
+                        View All Businesses
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="business-grid">
+                    <!-- Business Card 1 -->
+                    <a href="#" class="business-card">
+                        <div class="card-header">
+                            <span class="business-category">Restaurant</span>
+                            <h3 class="business-name">La Casita Dominicana</h3>
+                            <div class="business-location">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                Santo Domingo, Distrito Nacional
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="business-description">Authentic Dominican cuisine with traditional recipes passed down for generations. Family-owned since 1985.</p>
+                            <div class="business-tags">
+                                <span class="business-tag">Traditional Food</span>
+                                <span class="business-tag">Family-Owned</span>
+                                <span class="business-tag">Open Late</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="business-rating">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <span>4.7</span>
+                                <span aria-hidden="true">/</span>
+                                <span class="sr-only">out of</span>
+                                <span>5</span>
+                            </div>
+                            <span class="contact-button">View Details</span>
+                        </div>
+                    </a>
+
+                    <!-- Business Card 2 -->
+                    <a href="#" class="business-card">
+                        <div class="card-header">
+                            <span class="business-category">Plumbing</span>
+                            <h3 class="business-name">Fontanería Caribeña</h3>
+                            <div class="business-location">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                Santiago de los Caballeros
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="business-description">24/7 emergency plumbing services with certified technicians. Serving Santiago for over 20 years.</p>
+                            <div class="business-tags">
+                                <span class="business-tag">24/7 Service</span>
+                                <span class="business-tag">Emergency</span>
+                                <span class="business-tag">Certified</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="business-rating">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <span>4.9</span>
+                                <span aria-hidden="true">/</span>
+                                <span class="sr-only">out of</span>
+                                <span>5</span>
+                            </div>
+                            <span class="contact-button">View Details</span>
+                        </div>
+                    </a>
+
+                    <!-- Business Card 3 -->
+                    <a href="#" class="business-card">
+                        <div class="card-header">
+                            <span class="business-category">Dental Care</span>
+                            <h3 class="business-name">Clínica Dental Sonrisa</h3>
+                            <div class="business-location">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                Punta Cana, La Altagracia
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="business-description">Modern dental clinic offering comprehensive dental care with state-of-the-art equipment.</p>
+                            <div class="business-tags">
+                                <span class="business-tag">Modern Equipment</span>
+                                <span class="business-tag">English Speaking</span>
+                                <span class="business-tag">Insurance</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="business-rating">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <span>4.8</span>
+                                <span aria-hidden="true">/</span>
+                                <span class="sr-only">out of</span>
+                                <span>5</span>
+                            </div>
+                            <span class="contact-button">View Details</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label">Verified Businesses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">184</div>
+                        <div class="stat-label">Industry Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">31</div>
+                        <div class="stat-label">Provinces Covered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.7</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" id="contact" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Index</h3>
+                    <p>Dominican Republic's official business directory. Connecting communities with trusted local businesses since 2010.</p>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <span>+1 (809) 555-0123</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span>info@directorium.do</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <span>Santo Domingo, Distrito Nacional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Add Your Business</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Business Categories</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Popular Searches</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Business Insights</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Market Trends</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Advertising</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Partnership</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Government Partners</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Ministerio de Industria</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> Dirección de Impuestos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> ProDominicana</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" aria-hidden="true"></i> DGII</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2024 Index. Dominican Republic Business Directory. All rights reserved.</p>
+                <p style="margin-top: 8px;">This website is WCAG 2.2 AA compliant and fully accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden screen reader text -->
+    <div class="sr-only" aria-hidden="true">
+        Screen reader accessible content
+    </div>
+</body>
+</html>

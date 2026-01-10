@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalFinder - Find Local Businesses & Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff6b00;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Popular Categories */
+        .popular-categories {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: #ff6b00;
+            margin-bottom: 15px;
+        }
+        
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        /* Discover Local */
+        .discover-local {
+            background: white;
+            padding: 60px 20px;
+        }
+        
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .business-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .business-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .business-info {
+            padding: 20px;
+        }
+        
+        .business-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .business-category {
+            color: #ff6b00;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .business-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .stars {
+            color: #ffc107;
+        }
+        
+        .business-address {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        /* Platform Info */
+        .platform-info {
+            padding: 70px 20px;
+            background: #f1f8ff;
+            text-align: center;
+        }
+        
+        .info-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .info-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .info-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b00;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: #e55a00;
+        }
+        
+        /* Business Owner Section */
+        .business-owner {
+            padding: 70px 20px;
+            background: white;
+            text-align: center;
+        }
+        
+        .owner-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .owner-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .owner-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .owner-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #ff6b00;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a00;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #ff6b00;
+            border: 2px solid #ff6b00;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: #ff6b00;
+            color: white;
+        }
+        
+        /* Popular Searches */
+        .popular-searches {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        .tags-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .search-tag {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .search-tag:hover {
+            background: #ff6b00;
+            color: white;
+            border-color: #ff6b00;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-text {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .owner-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Find Local Businesses & Services</h1>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search companies, services, person, address, phone">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="popular-categories">
+        <h2 class="section-title">Popular Near You</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-bolt"></i></div>
+                <div class="category-name">Electricians</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-hard-hat"></i></div>
+                <div class="category-name">Construction</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-wrench"></i></div>
+                <div class="category-name">Plumbing</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                <div class="category-name">Restaurants</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discover Local -->
+    <section class="discover-local">
+        <h2 class="section-title">Discover Local</h2>
+        <div class="business-grid">
+            <div class="business-card">
+                <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3')"></div>
+                <div class="business-info">
+                    <div class="business-name">Hair & Beauty Studio</div>
+                    <div class="business-category">Beauty Salon</div>
+                    <div class="business-rating">
+                        <div class="stars">★★★★☆</div>
+                        <span>4.5 (128 reviews)</span>
+                    </div>
+                    <div class="business-address">123 Main Street, Downtown</div>
+                </div>
+            </div>
+            <div class="business-card">
+                <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3')"></div>
+                <div class="business-info">
+                    <div class="business-name">Bella's Cafe</div>
+                    <div class="business-category">Coffee Shop</div>
+                    <div class="business-rating">
+                        <div class="stars">★★★★★</div>
+                        <span>4.8 (210 reviews)</span>
+                    </div>
+                    <div class="business-address">456 Park Avenue, Midtown</div>
+                </div>
+            </div>
+            <div class="business-card">
+                <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3')"></div>
+                <div class="business-info">
+                    <div class="business-name">Tech Repair Pro</div>
+                    <div class="business-category">Electronics Repair</div>
+                    <div class="business-rating">
+                        <div class="stars">★★★★☆</div>
+                        <span>4.3 (87 reviews)</span>
+                    </div>
+                    <div class="business-address">789 Tech Boulevard, Silicon District</div>
+                </div>
+            </div>
+            <div class="business-card">
+                <div class="business-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3')"></div>
+                <div class="business-info">
+                    <div class="business-name">Green Landscaping</div>
+                    <div class="business-category">Gardening Services</div>
+                    <div class="business-rating">
+                        <div class="stars">★★★★★</div>
+                        <span>4.7 (156 reviews)</span>
+                    </div>
+                    <div class="business-address">321 Garden Road, Riverside</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Info -->
+    <section class="platform-info">
+        <div class="info-container">
+            <h2 class="info-title">Find Local Businesses with LocalFinder</h2>
+            <p class="info-text">
+                LocalFinder is your comprehensive local business directory connecting you with trusted service providers, 
+                shops, restaurants, and professionals in your community. With thousands of listings and verified reviews, 
+                we make it easy to find exactly what you need, right where you need it.
+            </p>
+            <a href="#" class="cta-button">Explore Businesses</a>
+        </div>
+    </section>
+
+    <!-- Business Owner Section -->
+    <section class="business-owner">
+        <div class="owner-container">
+            <h2 class="owner-title">Are You a Business Owner?</h2>
+            <p class="owner-text">
+                Join thousands of local businesses already benefiting from LocalFinder. 
+                Claim your listing, update your information, add photos, and connect with new customers 
+                searching for your services every day.
+            </p>
+            <div class="owner-buttons">
+                <a href="#" class="btn-primary">Claim Your Business</a>
+                <a href="#" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Searches -->
+    <section class="popular-searches">
+        <h2 class="section-title">More Popular Searches</h2>
+        <div class="tags-container">
+            <a href="#" class="search-tag">Restaurants</a>
+            <a href="#" class="search-tag">Plumbers</a>
+            <a href="#" class="search-tag">Electricians</a>
+            <a href="#" class="search-tag">Hair Salons</a>
+            <a href="#" class="search-tag">Auto Repair</a>
+            <a href="#" class="search-tag">Dentists</a>
+            <a href="#" class="search-tag">Home Cleaning</a>
+            <a href="#" class="search-tag">Real Estate</a>
+            <a href="#" class="search-tag">Pizza Delivery</a>
+            <a href="#" class="search-tag">Gyms</a>
+            <a href="#" class="search-tag">Hotels</a>
+            <a href="#" class="search-tag">Florists</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">LocalFinder</div>
+        <p class="footer-text">Connecting communities with local businesses since 2023</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Index — Dominican Republic Business Directory</title>
+  <meta name="description" content="Find trusted businesses, phone numbers and addresses across the Dominican Republic. Search by business, category or city." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%93%8D%3C/text%3E%3C/svg%3E">
+  <!-- Fonts (display swap to avoid FOIT) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    /* ---------- Design tokens (compact) ---------- */
+    :root{
+      --brand:#00695c;              /* primary */
+      --brand-600:#005047;
+      --accent:#ff9800;
+      --bg:#f6f7f8;
+      --surface:#fff;
+      --muted:#525252;
+      --border:#e6e8ea;
+      --radius:10px;
+      --max-w:1120px;
+      --sp-xxs:6px; --sp-xs:8px; --sp-s:12px; --sp-1:16px; --sp-2:24px; --sp-3:32px;
+      --fs-sm:0.9rem; --fs-base:1rem; --fs-lg:1.125rem;
+      --shadow: 0 6px 18px rgba(0,0,0,0.06);
+      --focus: 3px solid rgba(0,105,92,0.12);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* ---------- Reset & base ---------- */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+      font-size:var(--fs-base);
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+
+    /* ---------- Utility containers ---------- */
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--sp-2)}
+    .row{display:flex;gap:var(--sp-2);align-items:center}
+
+    /* ---------- Skip link ---------- */
+    .skip-link{
+      position: absolute;
+      left:-999px;
+      top:auto;
+      width:1px;height:1px;
+      overflow:hidden;
+    }
+    .skip-link:focus{
+      left:var(--sp-2);top:var(--sp-2);width:auto;height:auto;padding:var(--sp-xs) var(--sp-s);background:#fff;border-radius:6px;z-index:9999;
+      box-shadow:var(--shadow);
+    }
+
+    /* ---------- Header ---------- */
+    header{
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+      position:sticky;top:0;z-index:40;
+      box-shadow:0 2px 6px rgba(0,0,0,0.03);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--brand);font-size:1.05rem}
+    .brand .material-icons{font-size:28px}
+    nav[aria-label="Primary"]{display:flex;gap:18px;align-items:center}
+    .nav-link{font-weight:600;color:var(--muted);font-size:0.95rem;padding:8px;border-radius:8px}
+    .nav-link:hover,.nav-link:focus{background:rgba(0,0,0,0.03);color:var(--brand-600);outline:none}
+    .cta-register{background:var(--accent);color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;border:none;cursor:pointer}
+    .cta-register:focus{outline:var(--focus)}
+
+    /* ---------- Mobile menu button ---------- */
+    .menu-btn{display:none;border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer}
+    .menu-btn .material-icons{font-size:28px;color:var(--muted)}
+    .menu-btn:focus{outline:var(--focus)}
+
+    /* ---------- Hero / Search ---------- */
+    .hero{
+      background:linear-gradient(180deg,var(--brand) 0%, #014f47 100%);
+      color:white;padding:38px 0 56px;border-bottom:4px solid rgba(0,0,0,0.04)
+    }
+    .hero-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+    .hero h1{margin:0;font-size:1.6rem;letter-spacing:-0.01em}
+    .hero p{margin:0;max-width:720px;text-align:center;opacity:0.95;font-size:var(--fs-lg)}
+
+    .search-card{
+      width:100%;max-width:920px;background:var(--surface);padding:12px;border-radius:12px;margin-top:12px;box-shadow:var(--shadow);display:flex;gap:8px;
+      align-items:center;
+    }
+    .search-field{
+      flex:1;border:1px solid var(--border);padding:12px 14px;border-radius:8px;font-size:var(--fs-base)
+    }
+    .search-field:focus{outline:var(--focus);border-color:var(--brand)}
+    .search-actions{display:flex;gap:8px}
+    .btn-search{background:var(--brand);color:#fff;padding:12px 16px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+    .btn-search:focus{outline:var(--focus)}
+
+    /* ---------- Main layout ---------- */
+    main{padding:var(--sp-3) 0}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:24px}
+    .primary{display:flex;flex-direction:column;gap:18px}
+    .secondary{position:relative}
+
+    /* ---------- Cards ---------- */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+    .card h2{margin:0 0 8px;font-size:1.05rem;color:var(--brand)}
+    .muted{color:var(--muted);font-size:var(--fs-sm)}
+
+    /* Featured listing row */
+    .listing{display:flex;gap:12px;align-items:flex-start;border-radius:10px;overflow:hidden;border:1px solid var(--border);transition:box-shadow .18s}
+    .listing:hover{box-shadow:var(--shadow)}
+    .listing img{width:140px;height:100px;object-fit:cover;flex-shrink:0}
+    .listing-body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .listing h3{margin:0;font-size:1rem}
+    .meta{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:0.95rem}
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:#f1f6f5;padding:6px 8px;border-radius:8px;font-weight:600;color:var(--brand);font-size:0.85rem}
+
+    /* ---------- Secondary (ads, cities) ---------- */
+    .ads {display:flex;flex-direction:column;gap:12px}
+    .ad-mini{background:linear-gradient(135deg,#fff7ed,#fff3e0);border-left:4px solid var(--accent);padding:12px;border-radius:10px}
+    .ad-mini .sr-only{position:absolute;left:-9999px}
+
+    .cities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .city-btn{display:block;padding:10px;border-radius:8px;background:#fff;border:1px solid var(--border);text-align:center;font-weight:600;color:var(--muted)}
+
+    /* ---------- Footer ---------- */
+    footer{margin-top:40px;background:var(--surface);border-top:1px solid var(--border);padding:24px 0;color:var(--muted)}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+
+    /* ---------- focus visuals ---------- */
+    :focus{outline:none}
+    a:focus,.btn-search:focus,.nav-link:focus,.city-btn:focus{box-shadow:0 0 0 4px rgba(0,105,92,0.08);border-radius:8px}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:980px){ .grid{grid-template-columns:1fr} .secondary{order:2} }
+    @media (max-width:720px){
+      .header-inner{height:64px}
+      .nav-link{display:none}
+      .menu-btn{display:inline-flex}
+      .search-card{flex-direction:column;align-items:stretch}
+      .cities-grid{grid-template-columns:repeat(3,1fr)}
+      .brand{gap:8px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip link -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner" role="banner">
+      <div class="brand" aria-hidden="false">
+        <span class="material-icons" aria-hidden="true">place</span>
+        <span>Index </span>
+      </div>
+
+      <!-- Primary nav -->
+      <nav aria-label="Primary">
+        <a class="nav-link" href="#categories">Categories</a>
+        <a class="nav-link" href="#cities">Cities</a>
+        <a class="nav-link" href="#featured">Featured</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <button class="cta-register" onclick="location.href='#register'">Add Business</button>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button class="menu-btn" aria-expanded="false" aria-controls="mobile-menu" id="menuToggle" aria-label="Open menu">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile menu (hidden by default; toggled via small JS) -->
+    <div id="mobile-menu" style="display:none;background:var(--surface);border-top:1px solid var(--border)">
+      <div class="container" style="padding:12px 0;display:flex;flex-direction:column;gap:6px">
+        <a class="city-btn" href="#categories">Categories</a>
+        <a class="city-btn" href="#cities">Cities</a>
+        <a class="city-btn" href="#featured">Featured</a>
+        <a class="city-btn" href="#register">Add Business</a>
+        <a class="city-btn" href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero with prominent search -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container hero-inner">
+      <h1 id="hero-heading">Find businesses across the Dominican Republic</h1>
+      <p>Search by business name, service, or city. Accurate listings, verified contacts.</p>
+
+      <form class="search-card" action="/search" method="get" role="search" aria-label="Search directory">
+        <label for="q" class="sr-only" style="position:absolute;left:-9999px">Search query</label>
+        <input id="q" name="q" class="search-field" type="search" autocomplete="off" placeholder="e.g. 'plumbing', 'hotel', 'Jalao' " required aria-required="true">
+
+        <label for="city" class="sr-only" style="position:absolute;left:-9999px">City or province</label>
+        <input id="city" name="city" class="search-field" type="text" placeholder="City or province (optional)" aria-label="City or province">
+
+        <div class="search-actions" role="group" aria-label="Search actions">
+          <button type="submit" class="btn-search">Search</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main id="main" class="container" tabindex="-1">
+    <div class="grid" role="main" aria-labelledby="main-heading">
+      <div class="primary">
+        <h2 id="main-heading" class="muted">Results & highlights</h2>
+
+        <!-- Featured -->
+        <section class="card" id="featured" aria-labelledby="featured-title">
+          <h2 id="featured-title">Featured businesses</h2>
+
+          <a class="listing" href="#jalao">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=60" width="140" height="100" alt="Interior of Jalao restaurant" loading="lazy">
+            <div class="listing-body">
+              <h3>Jalao Restaurant</h3>
+              <div class="meta"><span class="material-icons" aria-hidden="true" style="font-size:16px">place</span> Zona Colonial, Santo Domingo &nbsp; • &nbsp; <span class="material-icons" aria-hidden="true" style="font-size:16px">call</span> 809-686-5200</div>
+              <p class="muted" style="margin:0">Authentic Dominican flavours and live music. Open nightly.</p>
+              <div class="tags" aria-hidden="true"><span class="tag">Restaurant</span><span class="tag">Live music</span></div>
+            </div>
+          </a>
+
+          <a class="listing" href="#hotel-casa">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=60" width="140" height="100" alt="Hotel Casa del Mar exterior" loading="lazy">
+            <div class="listing-body">
+              <h3>Hotel Casa del Mar</h3>
+              <div class="meta"><span class="material-icons" aria-hidden="true" style="font-size:16px">place</span> Las Terrenas, Samaná &nbsp; • &nbsp; <span class="material-icons" aria-hidden="true" style="font-size:16px">star</span> 4.8</div>
+              <p class="muted">Boutique beachfront hotel — rooftop spa and breakfast included.</p>
+            </div>
+          </a>
+
+          <!-- CTA -->
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+            <a class="cta-register" href="#register">Add your business</a>
+            <a href="#categories" style="color:var(--muted);font-weight:600">Browse categories</a>
+          </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="card" id="categories" aria-labelledby="cat-title">
+          <h2 id="cat-title">Popular categories</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px">
+            <a class="city-btn" href="?c=restaurants" aria-label="Restaurants">Restaurants</a>
+            <a class="city-btn" href="?c=hotels" aria-label="Hotels">Hotels</a>
+            <a class="city-btn" href="?c=medical" aria-label="Medical services">Medical</a>
+            <a class="city-btn" href="?c=auto" aria-label="Auto services">Auto</a>
+            <a class="city-btn" href="?c=legal" aria-label="Legal">Legal</a>
+            <a class="city-btn" href="?c=realestate" aria-label="Real estate">Real Estate</a>
+          </div>
+        </section>
+
+        <!-- Contact / Register (kept in primary because it's critical for listings) -->
+        <section class="card" id="register" aria-labelledby="register-title">
+          <h2 id="register-title">Add your business</h2>
+          <p class="muted">Reach customers across the Dominican Republic. Basic listing is free — paid options for featured placement.</p>
+          <form action="/register" method="post" style="display:flex;flex-direction:column;gap:8px;margin-top:12px" aria-label="Business registration">
+            <label for="bname" class="muted">Business name</label>
+            <input id="bname" name="business" class="search-field" required>
+
+            <label for="bphone" class="muted">Phone</label>
+            <input id="bphone" name="phone" class="search-field">
+
+            <label for="bcity" class="muted">City</label>
+            <input id="bcity" name="city" class="search-field">
+
+            <div style="display:flex;gap:8px">
+              <button class="cta-register" type="submit">List my business</button>
+              <a href="#contact" style="align-self:center;color:var(--muted)">Contact sales</a>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Secondary column -->
+      <aside class="secondary" aria-labelledby="side-title">
+        <div class="card">
+          <h2 id="side-title">Popular cities</h2>
+          <div class="cities-grid" style="margin-top:12px">
+            <a class="city-btn" href="?city=santo-domingo">Santo Domingo</a>
+            <a class="city-btn" href="?city=santiago">Santiago</a>
+            <a class="city-btn" href="?city=punta-cana">Punta Cana</a>
+            <a class="city-btn" href="?city=la-romana">La Romana</a>
+            <a class="city-btn" href="?city=puerto-plata">Puerto Plata</a>
+            <a class="city-btn" href="?city=boca-chica">Boca Chica</a>
+          </div>
+        </div>
+
+        <!-- Ads / premium (clearly labeled for accessibility) -->
+        <div class="ads" style="margin-top:12px">
+          <div class="ad-mini" role="region" aria-label="Sponsored listing: Punta Cana Medical Center">
+            <div style="font-weight:700">Sponsored</div>
+            <div style="margin-top:6px">
+              <div style="font-size:0.98rem;font-weight:700">Punta Cana Medical Center</div>
+              <div class="muted">24/7 emergency services • English-speaking staff</div>
+              <div class="muted" style="margin-top:8px"><span class="material-icons" aria-hidden="true" style="font-size:16px">call</span> 809-555-1234</div>
+            </div>
+          </div>
+
+          <div class="ad-mini" role="region" aria-label="Sponsored listing: Caribbean Real Estate Group">
+            <div style="font-weight:700">Sponsored</div>
+            <div style="margin-top:6px">
+              <div style="font-size:0.98rem;font-weight:700">Caribbean Real Estate Group</div>
+              <div class="muted">Buy, sell and rent island properties.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 8px">Stay updated</h3>
+          <p class="muted" style="margin:0 0 10px">Get listings, offers and updates via email.</p>
+          <form action="/subscribe" method="post">
+            <label for="email" class="muted sr-only">Email address</label>
+            <input id="email" name="email" type="email" class="search-field" placeholder="you@domain.com" required>
+            <div style="margin-top:8px;display:flex;gap:8px">
+              <button class="btn-search" type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Contact + Footer -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <strong>Index RD</strong>
+          <div class="muted" style="margin-top:8px">The complete business directory for the Dominican Republic since 2020.</div>
+        </div>
+
+        <div>
+          <strong>Directory</strong>
+          <nav aria-label="Footer directory" class="muted" style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <a href="#categories">Browse categories</a>
+            <a href="#cities">Browse by city</a>
+            <a href="#featured">Featured</a>
+            <a href="#register">Add your business</a>
+          </nav>
+        </div>
+
+        <div>
+          <strong>Company</strong>
+          <div class="muted" style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+            <a href="#contact">Contact</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+          </div>
+        </div>
+
+        <div>
+          <strong>Contact</strong>
+          <div class="muted" style="margin-top:8px">Av. 27 de Febrero #245, Santo Domingo<br>+1 (809) 555-7890</div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:var(--muted);font-size:0.95rem">
+        <div>&copy; <span id="year"></span> Index Dominican Republic. All rights reserved.</div>
+        <div>🇩🇴 Serving all 32 provinces</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Minimal JS only for mobile menu toggle + year -->
+  <script>
+    (function(){
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Menu toggle (accessible)
+      var btn = document.getElementById('menuToggle');
+      var menu = document.getElementById('mobile-menu');
+      btn && btn.addEventListener('click', function(){
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        menu.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      });
+    })();
+  </script>
+</body>
+</html>

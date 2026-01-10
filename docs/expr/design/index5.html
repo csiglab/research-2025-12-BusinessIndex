@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index | Dominican Republic Business Directory</title>
+    <meta name="description" content="The official business directory of the Dominican Republic.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* DESIGN SYSTEM: Minimalist Modern */
+        :root {
+            /* Palette - High Contrast */
+            --background: #FAFAFA;       /* Warm Off-White */
+            --foreground: #0F172A;       /* Deep Slate */
+            --muted: #F1F5F9;           /* Slate 100 */
+            --muted-foreground: #64748B; /* Slate 500 */
+            
+            /* The Signature Accent */
+            --accent: #0052FF;           /* Electric Blue */
+            --accent-secondary: #4D7CFF;
+            --accent-gradient: linear-gradient(135deg, #0052FF 0%, #4D7CFF 100%);
+            
+            /* Surfaces */
+            --card-bg: #FFFFFF;
+            --border: #E2E8F0;
+            
+            /* Typography */
+            --font-display: 'Calistoga', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            /* Shadows & Depth */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.06);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.08);
+            --shadow-glow: 0 0 40px -10px rgba(0, 82, 255, 0.3);
+            
+            /* Spacing */
+            --container-width: 1280px;
+            --radius-lg: 16px;
+            --radius-pill: 9999px;
+        }
+
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--foreground);
+            background-color: var(--background);
+            /* Texture: Subtle Dot Pattern */
+            background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+            background-size: 32px 32px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            color: var(--foreground);
+            font-weight: 400; /* Calistoga is naturally bold */
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Utilities */
+        .text-gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            background: rgba(0, 82, 255, 0.05);
+            border: 1px solid rgba(0, 82, 255, 0.15);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .pulsing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Header */
+        header {
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            text-decoration: none;
+            color: var(--foreground);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Search - Modern & Floating */
+        .search-wrapper {
+            flex: 1;
+            max-width: 480px;
+            position: relative;
+            margin: 0 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px 12px 48px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            background: white;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0, 82, 255, 0.1);
+        }
+
+        .search-icon {
+            position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+            color: var(--muted-foreground);
+        }
+
+        /* Hero Section - Asymmetric & Animated */
+        .hero {
+            padding: 6rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+        }
+
+        /* Abstract Hero Graphic (CSS Only) */
+        .hero-graphic {
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .graphic-ring {
+            position: absolute;
+            width: 380px; height: 380px;
+            border: 1px dashed var(--border);
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .fc-1 { top: 20%; right: 10%; animation-delay: 0s; z-index: 2; }
+        .fc-2 { bottom: 15%; left: 10%; animation-delay: 1.5s; z-index: 1; }
+        .fc-3 { top: 40%; left: 40%; transform: translate(-50%, -50%); width: 140px; height: 140px; background: var(--accent-gradient); border-radius: 30px; opacity: 0.1; animation: pulse 4s infinite; }
+
+        /* Buttons - Electric Gradients */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            font-size: 1rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 82, 255, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 82, 255, 0.35);
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Stats - Inverted Section */
+        .stats-section {
+            margin-top: 2rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--foreground);
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Cards */
+        .business-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Featured Card: Gradient Border Trick */
+        .featured-wrapper {
+            padding: 2px;
+            background: var(--accent-gradient);
+            border-radius: calc(var(--radius-lg) + 2px);
+            height: 100%;
+        }
+        
+        .featured-wrapper .business-card {
+            height: 100%;
+            border: none;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .card-logo {
+            width: 56px; height: 56px;
+            border-radius: 12px;
+            background: var(--muted);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+        }
+
+        .card-info h3 { font-size: 1.25rem; margin-bottom: 4px; }
+        .card-cat { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: 4px; display: block; }
+        
+        .card-content { padding: 0 1.5rem 1.5rem; flex: 1; }
+        .card-content p { color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6; }
+
+        .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1rem; }
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: var(--muted);
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            font-weight: 500;
+        }
+
+        .card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .card-actions a { color: var(--muted-foreground); margin-right: 12px; transition: 0.2s; }
+        .card-actions a:hover { color: var(--accent); }
+
+        .view-btn {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Controls */
+        .controls-section { padding: 4rem 0 2rem; }
+        .filter-bar {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tab {
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--muted-foreground);
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .tab:hover { background: white; border-color: var(--border); color: var(--foreground); }
+        .tab.active { background: var(--foreground); color: white; }
+
+        /* Catalog Grid */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 6rem;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem; }
+        .footer-col h4 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.75rem; }
+        .footer-col a { color: var(--muted-foreground); text-decoration: none; transition: 0.2s; }
+        .footer-col a:hover { color: var(--accent); }
+
+        /* Animations */
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 3rem; }
+            .hero-graphic { display: none; } /* Hide complex graphic on mobile */
+            .search-wrapper { margin: 1rem 0; order: 3; width: 100%; max-width: 100%; }
+            .header-content { flex-wrap: wrap; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Toast & Modal (Minimalist) */
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: var(--foreground); color: white;
+            padding: 1rem 1.5rem; border-radius: 12px;
+            display: flex; align-items: center; gap: 12px;
+            transform: translateY(100px); opacity: 0; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 5000; box-shadow: var(--shadow-xl);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(4px);
+            z-index: 4000; display: none; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-card {
+            background: white; width: 90%; max-width: 600px;
+            padding: 2rem; border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xl);
+            animation: float 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Loading */
+        .loader { position: fixed; inset: 0; background: var(--background); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s; }
+        .loader.hidden { opacity: 0; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="loader" id="loader">
+        <div class="spinner" style="width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: rotate 1s linear infinite;"></div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle" style="color: var(--accent);"></i>
+        <div>
+            <div style="font-weight: 600; font-size: 0.9rem;" id="toastTitle">Success</div>
+            <div style="font-size: 0.8rem; opacity: 0.8;" id="toastMessage">Operation successful</div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="businessModal">
+        <div class="modal-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                <h2 id="modalTitle">Business Name</h2>
+                <button id="modalClose" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                Index
+            </a>
+
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Find businesses, services, or professionals...">
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button class="btn btn-secondary" style="padding: 10px 20px;">Sign In</button>
+                <button class="btn btn-primary">Add Listing</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <div class="badge-pill">
+                    <span class="pulsing-dot"></span>
+                    The Official Directory
+                </div>
+                <h1>Discover the <span class="text-gradient">Best of DR</span> Business</h1>
+                <p>Connect with verified professionals, top-rated services, and innovative companies across the Dominican Republic.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#catalog" class="btn btn-primary">Browse Catalog <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="btn btn-secondary">How it Works</a>
+                </div>
+            </div>
+            
+            <div class="hero-graphic">
+                <div class="graphic-ring"></div>
+                <div class="fc-3"></div> <div class="floating-card fc-1">
+                    <div style="width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-chart-line"></i></div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted-foreground);">TRENDING</div>
+                        <div style="font-weight: 600;">Tech Startups</div>
+                    </div>
+                </div>
+
+                <div class="floating-card fc-2">
+                    <div style="width: 40px; height: 40px; background: #10b981; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-star"></i></div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted-foreground);">TOP RATED</div>
+                        <div style="font-weight: 600;">Resorts & Travel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-number" data-target="2847">0</div>
+                    <div class="stat-label">Active Listings</div>
+                </div>
+                <div>
+                    <div class="stat-number" data-target="184">0</div>
+                    <div class="stat-label">Industries</div>
+                </div>
+                <div>
+                    <div class="stat-number" data-target="32">0</div>
+                    <div class="stat-label">Provinces</div>
+                </div>
+                <div>
+                    <div class="stat-number" data-target="98">0%</div>
+                    <div class="stat-label">Verified</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="container" style="margin-top: 4rem;">
+        <div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 2rem;">
+            <h2>Featured <span class="text-gradient">Highlights</span></h2>
+            <a href="#" class="view-btn">View All Featured &rarr;</a>
+        </div>
+        <div class="catalog-grid" id="featuredGrid">
+            </div>
+    </section>
+
+    <section class="container controls-section" id="catalog">
+        <div class="filter-bar">
+            <div class="tab-group" id="filterTabs">
+                <button class="tab active" data-filter="All">All Industries</button>
+                <button class="tab" data-filter="Technology">Technology</button>
+                <button class="tab" data-filter="Hospitality">Hospitality</button>
+                <button class="tab" data-filter="Health">Health</button>
+                <button class="tab" data-filter="Legal">Legal</button>
+                <button class="tab" data-filter="Finance">Finance</button>
+            </div>
+            
+            <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;" id="sortBtn">
+                Sort by: Featured <i class="fas fa-chevron-down" style="margin-left: 8px;"></i>
+            </button>
+        </div>
+
+        <div class="catalog-grid" id="mainGrid">
+            </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <button class="btn btn-secondary" id="loadMoreBtn">Load More Businesses</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+                        <div class="logo-icon" style="width: 32px; height: 32px; font-size: 0.9rem;"><i class="fas fa-layer-group"></i></div>
+                        Index
+                    </a>
+                    <p style="color: var(--muted-foreground); font-size: 0.9rem; line-height: 1.6;">
+                        The modern directory for the Dominican Republic. Connecting quality businesses with the world.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Discover</h4>
+                    <ul>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Locations</a></li>
+                        <li><a href="#">Trending</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Business</h4>
+                    <ul>
+                        <li><a href="#">Claim Listing</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Advertising</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border); padding-top: 2rem; text-align: center; color: var(--muted-foreground); font-size: 0.85rem;">
+                &copy; 2024 Index Directory. Designed with <span style="color: var(--accent);">Electric Blue</span>.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const businesses = [
+            { id: 1, name: "Nexus Dynamics", cat: "Technology", desc: "AI-powered analytics platform transforming business intelligence in Santo Domingo.", rating: 4.9, logo: "ND", featured: true, tags: ["AI", "SaaS", "Data"], location: "Santo Domingo" },
+            { id: 2, name: "Punta Cana Resorts", cat: "Hospitality", desc: "Luxury all-inclusive experiences on the pristine beaches of the East Coast.", rating: 4.8, logo: "PC", featured: true, tags: ["Travel", "Luxury", "Beach"], location: "Punta Cana" },
+            { id: 3, name: "Dr. Rodriguez & Assoc.", cat: "Health", desc: "Premier dental care specialists focusing on cosmetic and restorative procedures.", rating: 4.9, logo: "DR", featured: false, tags: ["Dental", "Medical"], location: "Santiago" },
+            { id: 4, name: "Capital Legal Group", cat: "Legal", desc: "Corporate law firm specializing in international trade and foreign investment.", rating: 4.7, logo: "CL", featured: false, tags: ["Corporate", "Trade"], location: "Santo Domingo" },
+            { id: 5, name: "Banco Popular", cat: "Finance", desc: "Leading financial institution offering personal and commercial banking solutions.", rating: 4.6, logo: "BP", featured: false, tags: ["Banking", "Loans"], location: "National" },
+            { id: 6, name: "GreenEnergy DR", cat: "Technology", desc: "Solar panel installation and renewable energy consulting for businesses.", rating: 4.8, logo: "GE", featured: false, tags: ["Solar", "Green"], location: "La Romana" },
+            { id: 7, name: "Casa de Campo", cat: "Hospitality", desc: "World-class golf resort and villas offering exclusive Caribbean living.", rating: 4.9, logo: "CC", featured: true, tags: ["Golf", "Resort", "Luxury"], location: "La Romana" }
+        ];
+
+        // State
+        let currentFilter = "All";
+
+        // DOM
+        const featuredGrid = document.getElementById('featuredGrid');
+        const mainGrid = document.getElementById('mainGrid');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loader = document.getElementById('loader');
+
+        // Init
+        window.addEventListener('load', () => {
+            setTimeout(() => { loader.classList.add('hidden'); animateStats(); }, 800);
+            renderAll();
+        });
+
+        // Functions
+        function createCard(data, isFeaturedWrapper = false) {
+            const cardHTML = `
+                <div class="business-card">
+                    <div class="card-header">
+                        <div class="card-logo" style="color: ${data.featured ? 'var(--accent)' : 'var(--foreground)'}">${data.logo}</div>
+                        <div class="card-info">
+                            <span class="card-cat">${data.cat}</span>
+                            <h3>${data.name}</h3>
+                            <div style="font-size: 0.85rem; color: #f59e0b;"><i class="fas fa-star"></i> ${data.rating}</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>${data.desc}</p>
+                        <div class="tag-row">
+                            ${data.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-actions">
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                            <a href="#"><i class="fas fa-phone"></i></a>
+                        </div>
+                        <a href="#" class="view-btn" onclick="openModal('${data.name}', '${data.desc}')">View Details</a>
+                    </div>
+                </div>
+            `;
+
+            if (isFeaturedWrapper) {
+                return `<div class="featured-wrapper">${cardHTML}</div>`;
+            }
+            return cardHTML;
+        }
+
+        function renderAll() {
+            // Featured
+            featuredGrid.innerHTML = businesses
+                .filter(b => b.featured)
+                .map(b => createCard(b, true))
+                .join('');
+
+            // Main
+            filterMainGrid();
+        }
+
+        function filterMainGrid() {
+            const filtered = currentFilter === "All" 
+                ? businesses 
+                : businesses.filter(b => b.cat === currentFilter);
+            
+            mainGrid.innerHTML = filtered.map(b => createCard(b)).join('');
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.tab').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                filterMainGrid();
+            });
+        });
+
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            showToast("System Info", "This is a demo. No more data to load.");
+        });
+
+        // Utilities
+        function showToast(title, msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function animateStats() {
+            document.querySelectorAll('.stat-number').forEach(el => {
+                el.innerText = el.getAttribute('data-target');
+            });
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('businessModal');
+        window.openModal = (title, desc) => {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerHTML = `<p style="line-height:1.6; color:var(--muted-foreground)">${desc}</p><br><button class="btn btn-primary" style="width:100%">Contact Business</button>`;
+            modal.classList.add('active');
+        };
+        document.getElementById('modalClose').onclick = () => modal.classList.remove('active');
+        modal.onclick = (e) => { if(e.target === modal) modal.classList.remove('active'); };
+
+    </script>
+</body>
+</html>
