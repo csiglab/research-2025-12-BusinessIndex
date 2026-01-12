@@ -15,4 +15,4 @@
 - https://prompts.chat/
 - https://righteous-guardian-68f.notion.site/Computer-User-Interface-22535b6ff16f424eac56d9bca1cb757c?source=copy_link
 - https://github.com/f/awesome-chatgpt-prompts
-- [A Design of an AI Enable Software Production Model](https://gleaming-slice-bf8.notion.site/A-Design-of-an-AI-Enable-Software-Production-Model-2c1e2010b23f8028a55cd3052cb19ead?source=copy_link)
+- [AI Enable Software Production Model]([https://gleaming-slice-bf8.notion.site/A-Design-of-an-AI-Enable-Software-Production-Model-2c1e2010b23f8028a55cd3052cb19ead?source=copy_link](https://www.bremontix.xyz/lab/pro/Production/Industry/Software/Production/Model/))
